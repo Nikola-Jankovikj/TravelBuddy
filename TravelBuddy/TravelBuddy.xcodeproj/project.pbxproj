@@ -12,6 +12,14 @@
 		F9DA7C182C8DE42900B1CA46 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C172C8DE42900B1CA46 /* Item.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
+		F9DA7C252C8E0F6A00B1CA46 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C242C8E0F6A00B1CA46 /* User.swift */; };
+		F9DA7C272C8E123C00B1CA46 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C262C8E123C00B1CA46 /* Trip.swift */; };
+		F9DA7C292C8E126A00B1CA46 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C282C8E126A00B1CA46 /* Match.swift */; };
+		F9DA7C2B2C8E128500B1CA46 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C2A2C8E128500B1CA46 /* Chat.swift */; };
+		F9DA7C2F2C8E139D00B1CA46 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C2E2C8E139D00B1CA46 /* Message.swift */; };
+		F9DA7C322C8E13B200B1CA46 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C312C8E13B200B1CA46 /* Location.swift */; };
+		F9DA7C352C8E141B00B1CA46 /* GroupChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C342C8E141B00B1CA46 /* GroupChat.swift */; };
+		F9DA7C382C8E147500B1CA46 /* TripStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C372C8E147500B1CA46 /* TripStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +29,14 @@
 		F9DA7C172C8DE42900B1CA46 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F9DA7C242C8E0F6A00B1CA46 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F9DA7C262C8E123C00B1CA46 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		F9DA7C282C8E126A00B1CA46 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		F9DA7C2A2C8E128500B1CA46 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		F9DA7C2E2C8E139D00B1CA46 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		F9DA7C312C8E13B200B1CA46 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		F9DA7C342C8E141B00B1CA46 /* GroupChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChat.swift; sourceTree = "<group>"; };
+		F9DA7C372C8E147500B1CA46 /* TripStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +69,9 @@
 		F9DA7C122C8DE42900B1CA46 /* TravelBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				F9DA7C362C8E146200B1CA46 /* Enums */,
+				F9DA7C2D2C8E139200B1CA46 /* ValueObjects */,
+				F9DA7C232C8E0F4E00B1CA46 /* Models */,
 				F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */,
 				F9DA7C152C8DE42900B1CA46 /* ContentView.swift */,
 				F9DA7C172C8DE42900B1CA46 /* Item.swift */,
@@ -68,6 +87,35 @@
 				F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F9DA7C232C8E0F4E00B1CA46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F9DA7C242C8E0F6A00B1CA46 /* User.swift */,
+				F9DA7C262C8E123C00B1CA46 /* Trip.swift */,
+				F9DA7C282C8E126A00B1CA46 /* Match.swift */,
+				F9DA7C2A2C8E128500B1CA46 /* Chat.swift */,
+				F9DA7C342C8E141B00B1CA46 /* GroupChat.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F9DA7C2D2C8E139200B1CA46 /* ValueObjects */ = {
+			isa = PBXGroup;
+			children = (
+				F9DA7C2E2C8E139D00B1CA46 /* Message.swift */,
+				F9DA7C312C8E13B200B1CA46 /* Location.swift */,
+			);
+			path = ValueObjects;
+			sourceTree = "<group>";
+		};
+		F9DA7C362C8E146200B1CA46 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				F9DA7C372C8E147500B1CA46 /* TripStatus.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,9 +188,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9DA7C272C8E123C00B1CA46 /* Trip.swift in Sources */,
+				F9DA7C252C8E0F6A00B1CA46 /* User.swift in Sources */,
+				F9DA7C2B2C8E128500B1CA46 /* Chat.swift in Sources */,
 				F9DA7C162C8DE42900B1CA46 /* ContentView.swift in Sources */,
+				F9DA7C382C8E147500B1CA46 /* TripStatus.swift in Sources */,
+				F9DA7C322C8E13B200B1CA46 /* Location.swift in Sources */,
 				F9DA7C182C8DE42900B1CA46 /* Item.swift in Sources */,
+				F9DA7C2F2C8E139D00B1CA46 /* Message.swift in Sources */,
+				F9DA7C352C8E141B00B1CA46 /* GroupChat.swift in Sources */,
 				F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */,
+				F9DA7C292C8E126A00B1CA46 /* Match.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

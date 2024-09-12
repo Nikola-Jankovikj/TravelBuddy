@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Identifiable, Codable {
+struct DbUser: Identifiable, Codable {
     var id: String?
     var name: String
     var age: Int

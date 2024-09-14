@@ -37,13 +37,21 @@ struct ProfileView: View {
                     }
                 }
             }
+            
+            if let user = viewModel.user {
+                Text("UserId: \(user.id)")
+            }
         }
-        .onAppear {
+        .task {
+            try? await viewModel.loadCurrentUser()
             viewModel.loadAuthProviders()
         }
+        .navigationTitle("Profile")
     }
 }
 
 #Preview {
-    ProfileView(showSignInView: .constant(false))
+    NavigationStack {
+        ProfileView(showSignInView: .constant(false))
+    }
 }

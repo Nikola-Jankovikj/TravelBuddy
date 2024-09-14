@@ -18,16 +18,16 @@ struct RootView: View {
                     ProfileView(showSignInView: $showSignInView)
                 }
             }
-            .onAppear {
-                let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
-                self.showSignInView = authUser == nil
-            }
-            .fullScreenCover(isPresented: $showSignInView, content: {
-                NavigationStack {
-                    AuthenticationView(showSignInView: $showSignInView)
-                }
-            })
         }
+        .onAppear {
+            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+            self.showSignInView = authUser == nil
+        }
+        .fullScreenCover(isPresented: $showSignInView, content: {
+            NavigationStack {
+                AuthenticationView(showSignInView: $showSignInView)
+            }
+        })
     }
 }
 

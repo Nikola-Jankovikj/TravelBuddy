@@ -15,23 +15,25 @@ class DbUserMapper {
     func mapSnapshotToDbUser(dict: [String: Any]) -> DbUser {
         
         let id = dict["id"] as? String ?? UUID().uuidString
-        let name = dict["name"] as? String
-        let age = dict["age"] as? Int
-        let personalPhotos = dict["personalPhotos"] as? [String]
+        let name = dict["name"] as? String ?? "Unknown"
+        let age = dict["age"] as? Int ?? 0
+        let personalPhotos = dict["personalPhotos"] as? [String] ?? []
         
         var location: Location?
         if let locationDict = dict["location"] as? [String: Any],
            let city = locationDict["city"] as? String,
            let country = locationDict["country"] as? String {
             location = Location(city: city, country: country)
+        } else {
+            location = Location(city: "Unknown", country: "Unknown")
         }
         
-        let description = dict["description"] as? String
-        let numberCompletedTrips = dict["numberCompletedTrips"] as? Int
-        let numberPhotosTaken = dict["numberPhotosTaken"] as? Int
-        let favoriteActivity = dict["favoriteActivity"] as? String
-        let likedUserIds = dict["likedUserIds"] as? [String]
-        let rejectedUserIds = dict["rejectedUserIds"] as? [String]
+        let description = dict["description"] as? String ?? "No description"
+        let numberCompletedTrips = dict["numberCompletedTrips"] as? Int ?? 0
+        let numberPhotosTaken = dict["numberPhotosTaken"] as? Int ?? 0
+        let favoriteActivity = dict["favoriteActivity"] as? String ?? "None"
+        let likedUserIds = dict["likedUserIds"] as? [String] ?? []
+        let rejectedUserIds = dict["rejectedUserIds"] as? [String] ?? []
         
         let dateCreated: Date
         if let dateCreatedStr = dict["dateCreated"] as? String, let date = ISO8601DateFormatter().date(from: dateCreatedStr) {
@@ -52,7 +54,7 @@ class DbUserMapper {
             name: name,
             age: age,
             personalPhotos: personalPhotos,
-            location: location,
+            location: location!,
             description: description,
             numberCompletedTrips: numberCompletedTrips,
             numberPhotosTaken: numberPhotosTaken,
@@ -63,5 +65,4 @@ class DbUserMapper {
             dateUpdated: dateUpdated
         )
     }
-    
 }

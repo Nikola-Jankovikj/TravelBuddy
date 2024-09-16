@@ -40,6 +40,11 @@
 		F9DA7C832C96159A00B1CA46 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F9DA7C822C96159A00B1CA46 /* FirebaseFirestore */; };
 		F9DA7C882C961B1D00B1CA46 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C872C961B1D00B1CA46 /* UserManager.swift */; };
 		F9DA7C8B2C96288900B1CA46 /* DbUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C8A2C96288900B1CA46 /* DbUserMapper.swift */; };
+		F9DA7C8E2C9707BF00B1CA46 /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C8D2C9707BF00B1CA46 /* CreateProfileView.swift */; };
+		F9DA7C902C9707C800B1CA46 /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C8F2C9707C800B1CA46 /* CreateProfileViewModel.swift */; };
+		F9DA7C932C9727D100B1CA46 /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C922C9727D100B1CA46 /* CitySearchView.swift */; };
+		F9DA7C952C9727D800B1CA46 /* CitySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C942C9727D800B1CA46 /* CitySearchViewModel.swift */; };
+		F9DA7C982C98B30C00B1CA46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C972C98B30C00B1CA46 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +78,11 @@
 		F9DA7C7F2C960AC000B1CA46 /* GoogleSignInResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInResultModel.swift; sourceTree = "<group>"; };
 		F9DA7C872C961B1D00B1CA46 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		F9DA7C8A2C96288900B1CA46 /* DbUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbUserMapper.swift; sourceTree = "<group>"; };
+		F9DA7C8D2C9707BF00B1CA46 /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
+		F9DA7C8F2C9707C800B1CA46 /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
+		F9DA7C922C9727D100B1CA46 /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
+		F9DA7C942C9727D800B1CA46 /* CitySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchViewModel.swift; sourceTree = "<group>"; };
+		F9DA7C972C98B30C00B1CA46 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +183,7 @@
 		F9DA7C552C9301EE00B1CA46 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F9DA7C962C98B2FE00B1CA46 /* Location */,
 				F9DA7C892C96287E00B1CA46 /* Mappers */,
 				F9DA7C862C961B1600B1CA46 /* Firestore */,
 				F9DA7C842C961AF100B1CA46 /* Authentication */,
@@ -203,6 +214,8 @@
 		F9DA7C6F2C96097E00B1CA46 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F9DA7C912C9727C700B1CA46 /* CitySearch */,
+				F9DA7C8C2C9707AF00B1CA46 /* CreateProfile */,
 				F9DA7C772C960A0F00B1CA46 /* Profile */,
 				F9DA7C762C960A0300B1CA46 /* Root */,
 				F9DA7C732C9609DC00B1CA46 /* Authentication */,
@@ -269,6 +282,32 @@
 				F9DA7C8A2C96288900B1CA46 /* DbUserMapper.swift */,
 			);
 			path = Mappers;
+			sourceTree = "<group>";
+		};
+		F9DA7C8C2C9707AF00B1CA46 /* CreateProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F9DA7C8D2C9707BF00B1CA46 /* CreateProfileView.swift */,
+				F9DA7C8F2C9707C800B1CA46 /* CreateProfileViewModel.swift */,
+			);
+			path = CreateProfile;
+			sourceTree = "<group>";
+		};
+		F9DA7C912C9727C700B1CA46 /* CitySearch */ = {
+			isa = PBXGroup;
+			children = (
+				F9DA7C922C9727D100B1CA46 /* CitySearchView.swift */,
+				F9DA7C942C9727D800B1CA46 /* CitySearchViewModel.swift */,
+			);
+			path = CitySearch;
+			sourceTree = "<group>";
+		};
+		F9DA7C962C98B2FE00B1CA46 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				F9DA7C972C98B30C00B1CA46 /* LocationManager.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,12 +396,16 @@
 				F9DA7C272C8E123C00B1CA46 /* Trip.swift in Sources */,
 				F9DA7C792C960A2600B1CA46 /* ProfileViewModel.swift in Sources */,
 				F9DA7C5A2C9302E500B1CA46 /* SignInEmailView.swift in Sources */,
+				F9DA7C952C9727D800B1CA46 /* CitySearchViewModel.swift in Sources */,
 				F9DA7C252C8E0F6A00B1CA46 /* DbUser.swift in Sources */,
 				F9DA7C7C2C960A8600B1CA46 /* AuthDataResultModel.swift in Sources */,
+				F9DA7C982C98B30C00B1CA46 /* LocationManager.swift in Sources */,
 				F9DA7C582C9301FF00B1CA46 /* AuthenticationView.swift in Sources */,
+				F9DA7C932C9727D100B1CA46 /* CitySearchView.swift in Sources */,
 				F9DA7C722C9609C600B1CA46 /* SignInEmailViewModel.swift in Sources */,
 				F9DA7C882C961B1D00B1CA46 /* UserManager.swift in Sources */,
 				F9DA7C802C960AC000B1CA46 /* GoogleSignInResultModel.swift in Sources */,
+				F9DA7C8E2C9707BF00B1CA46 /* CreateProfileView.swift in Sources */,
 				F9DA7C6D2C932DA000B1CA46 /* SignInGoogleHelper.swift in Sources */,
 				F9DA7C752C9609F400B1CA46 /* AuthenticationViewModel.swift in Sources */,
 				F9DA7C2B2C8E128500B1CA46 /* Chat.swift in Sources */,
@@ -377,6 +420,7 @@
 				F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */,
 				F9DA7C292C8E126A00B1CA46 /* Match.swift in Sources */,
 				F9DA7C5E2C930A6100B1CA46 /* RootView.swift in Sources */,
+				F9DA7C902C9707C800B1CA46 /* CreateProfileViewModel.swift in Sources */,
 				F9DA7C8B2C96288900B1CA46 /* DbUserMapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

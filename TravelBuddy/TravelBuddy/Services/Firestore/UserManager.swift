@@ -13,9 +13,10 @@ final class UserManager {
     static let shared = UserManager()
     private init() { }
     
-    func createNewUser(auth: AuthDataResultModel) throws {
-        var user = DbUser(id: auth.uid, dateCreated: Date.now, dateUpdated: Date.now)
-        try Firestore.firestore().collection("users").document(auth.uid).setData(from: user)
+    func createNewUser(user: DbUser) throws {
+//        var user = DbUser(id: auth.uid, dateCreated: Date.now, dateUpdated: Date.now)
+//        let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
+        try Firestore.firestore().collection("users").document(user.id).setData(from: user)
     }
     
     func getUser(userId: String) async throws -> DbUser {

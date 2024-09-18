@@ -21,23 +21,22 @@ struct ProfileView: View {
             
             VStack {
                 HStack {
-                    Text("\(String(describing: viewModel.user?.numberCompletedTrips)) completed trips")
+                    Text("\(viewModel.user?.numberCompletedTrips.description ?? "0") completed trips")
                         .padding(.horizontal)
                     
-                    Text("\(String(describing: viewModel.user?.numberPhotosTaken)) photos taken")
+                    Text("\(viewModel.user?.numberPhotosTaken.description ?? "0") photos taken")
                         .padding(.horizontal)
                     
-                    Text("\(String(describing: viewModel.user?.numberPhotosTaken)) photos taken")
+                    Text("\(viewModel.user?.numberPhotosTaken.description ?? "0") photos taken")
                         .padding(.horizontal)
                 }
                 .padding(.vertical)
                 
                 HStack {
-                    
                     Spacer()
                     
                     VStack {
-                        Text("\(String(describing: viewModel.user?.name)), \(String(describing: viewModel.user?.age))")
+                        Text("\(viewModel.user?.name.description ?? "Unknown"), \(viewModel.user?.age.description ?? "18")")
                         
                         Text("\(String(describing: viewModel.user?.location))")
                     }
@@ -57,7 +56,22 @@ struct ProfileView: View {
                 }
                 .padding(.vertical)
                 
-                Text("\(String(describing: viewModel.user?.description))")
+                HStack {
+                    Text("\(viewModel.user?.description.description ?? "No description")")
+                        .multilineTextAlignment(.leading)
+                        .padding()
+                    
+                    Spacer()
+                }
+            }
+        }
+        .onAppear {
+            Task {
+                do {
+                    try await viewModel.loadCurrentUser()
+                } catch {
+                    print("error \(error)")
+                }
             }
         }
     }

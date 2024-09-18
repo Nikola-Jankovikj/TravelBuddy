@@ -50,6 +50,7 @@ struct LogInWithEmailView: View {
     }
 }
 
-//#Preview {
-//    LogInWithEmailView(showSignInView: .constant(true), authUser: $authUser)
-//}
+#Preview {
+    LogInWithEmailView(showSignInView: .constant(true))
+        .environmentObject(AuthDataResultModelEnvironmentVariable())
+}

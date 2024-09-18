@@ -12,49 +12,54 @@ struct ProfileView: View {
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
     @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
+    @State var showEditProfileView = false
     
     var body: some View {
+        
         VStack {
+            Image("image")
             
-            NavigationStack {
-                Button("Log out") {
-                    Task {
-                        do {
-                            try viewModel.signOut()
-                            showSignInView = true
-                        } catch {
-                            print("Error \(error)")
+            VStack {
+                HStack {
+                    Text("\(String(describing: viewModel.user?.numberCompletedTrips)) completed trips")
+                        .padding(.horizontal)
+                    
+                    Text("\(String(describing: viewModel.user?.numberPhotosTaken)) photos taken")
+                        .padding(.horizontal)
+                    
+                    Text("\(String(describing: viewModel.user?.numberPhotosTaken)) photos taken")
+                        .padding(.horizontal)
+                }
+                .padding(.vertical)
+                
+                HStack {
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Text("\(String(describing: viewModel.user?.name)), \(String(describing: viewModel.user?.age))")
+                        
+                        Text("\(String(describing: viewModel.user?.location))")
+                    }
+                    
+                    Spacer()
+                    
+                    NavigationStack {
+                        Button("Edit Profile") {
+                            showEditProfileView = true
                         }
                     }
-                }
-            }
-            
-            if viewModel.authProviders.contains(.email) {
-                Button("Reset password") {
-                    Task {
-                        do {
-                            try await viewModel.resetPassword()
-                            print("PASSWORD RESET!")
-                        } catch {
-                            print("Error \(error)")
-                        }
+                    .navigationDestination(isPresented: $showEditProfileView) {
+                        EditProfileView(showSignInView: $showSignInView)
                     }
+                    
+                    Spacer()
                 }
-            }
-            
-            if let user = viewModel.user {
-                Text("UserId: \(user.id)")
-            } else {
-                Text("user is not found")
+                .padding(.vertical)
+                
+                Text("\(String(describing: viewModel.user?.description))")
             }
         }
-        .onAppear {
-            Task {
-                try? await viewModel.loadCurrentUser()
-                viewModel.loadAuthProviders()
-            }
-        }
-        .navigationTitle("Profile")
     }
 }
 

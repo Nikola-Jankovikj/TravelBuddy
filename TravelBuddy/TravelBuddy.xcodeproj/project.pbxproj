@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F97D540E2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */; };
+		F97D54112C9AFBC1005F10E9 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */; };
+		F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */; };
 		F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
@@ -52,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModelEnvironmentVariable.swift; sourceTree = "<group>"; };
+		F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelBuddyApp.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +117,15 @@
 				F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */,
 			);
 			path = EnvironmentVariableWrappers;
+			sourceTree = "<group>";
+		};
+		F97D540F2C9AFBB5005F10E9 /* EditProfile */ = {
+			isa = PBXGroup;
+			children = (
+				F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */,
+				F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */,
+			);
+			path = EditProfile;
 			sourceTree = "<group>";
 		};
 		F9DA7C072C8DE42900B1CA46 = {
@@ -229,6 +242,7 @@
 		F9DA7C6F2C96097E00B1CA46 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F97D540F2C9AFBB5005F10E9 /* EditProfile */,
 				F9DA7CA02C9A0ADF00B1CA46 /* LogInWithEmail */,
 				F9DA7C912C9727C700B1CA46 /* CitySearch */,
 				F9DA7C8C2C9707AF00B1CA46 /* CreateProfile */,
@@ -418,6 +432,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F97D54112C9AFBC1005F10E9 /* EditProfileViewModel.swift in Sources */,
 				F9DA7C272C8E123C00B1CA46 /* Trip.swift in Sources */,
 				F9DA7C792C960A2600B1CA46 /* ProfileViewModel.swift in Sources */,
 				F9DA7C5A2C9302E500B1CA46 /* SignUpEmailView.swift in Sources */,
@@ -435,6 +450,7 @@
 				F9DA7C6D2C932DA000B1CA46 /* SignInGoogleHelper.swift in Sources */,
 				F9DA7C752C9609F400B1CA46 /* AuthenticationViewModel.swift in Sources */,
 				F9DA7C2B2C8E128500B1CA46 /* Chat.swift in Sources */,
+				F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */,
 				F9DA7C382C8E147500B1CA46 /* TripStatus.swift in Sources */,
 				F9DA7C322C8E13B200B1CA46 /* Location.swift in Sources */,
 				F9DA7C7E2C960AAA00B1CA46 /* AuthProviderOptions.swift in Sources */,

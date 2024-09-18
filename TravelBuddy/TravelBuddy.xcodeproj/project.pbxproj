@@ -10,6 +10,7 @@
 		F97D540E2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */; };
 		F97D54112C9AFBC1005F10E9 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */; };
 		F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */; };
+		F97D54162C9B1E42005F10E9 /* ProfileHighlightedNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */; };
 		F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModelEnvironmentVariable.swift; sourceTree = "<group>"; };
 		F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHighlightedNumberView.swift; sourceTree = "<group>"; };
 		F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelBuddyApp.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,6 +130,14 @@
 			path = EditProfile;
 			sourceTree = "<group>";
 		};
+		F97D54142C9B1E12005F10E9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		F9DA7C072C8DE42900B1CA46 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +158,7 @@
 		F9DA7C122C8DE42900B1CA46 /* TravelBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				F97D54142C9B1E12005F10E9 /* Views */,
 				F9DA7C6F2C96097E00B1CA46 /* Features */,
 				F9DA7C692C9326B200B1CA46 /* Utilities */,
 				F9DA7C672C93243600B1CA46 /* GoogleService-Info.plist */,
@@ -442,6 +453,7 @@
 				F9DA7C7C2C960A8600B1CA46 /* AuthDataResultModel.swift in Sources */,
 				F9DA7C982C98B30C00B1CA46 /* LocationManager.swift in Sources */,
 				F9DA7C582C9301FF00B1CA46 /* AuthenticationView.swift in Sources */,
+				F97D54162C9B1E42005F10E9 /* ProfileHighlightedNumberView.swift in Sources */,
 				F9DA7C932C9727D100B1CA46 /* CitySearchView.swift in Sources */,
 				F9DA7C722C9609C600B1CA46 /* SignUpEmailViewModel.swift in Sources */,
 				F9DA7C882C961B1D00B1CA46 /* UserManager.swift in Sources */,

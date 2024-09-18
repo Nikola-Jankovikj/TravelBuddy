@@ -21,14 +21,23 @@ struct ProfileView: View {
             
             VStack {
                 HStack {
+                    Spacer()
+                    
                     Text("\(viewModel.user?.numberCompletedTrips.description ?? "0") completed trips")
+                        .multilineTextAlignment(.center)
                         .padding(.horizontal)
+                    
+                    Spacer()
                     
                     Text("\(viewModel.user?.numberPhotosTaken.description ?? "0") photos taken")
                         .padding(.horizontal)
                     
+                    Spacer()
+                    
                     Text("\(viewModel.user?.numberPhotosTaken.description ?? "0") photos taken")
                         .padding(.horizontal)
+                    
+                    Spacer()
                 }
                 .padding(.vertical)
                 
@@ -37,8 +46,11 @@ struct ProfileView: View {
                     
                     VStack {
                         Text("\(viewModel.user?.name.description ?? "Unknown"), \(viewModel.user?.age.description ?? "18")")
+                            .bold()
+                            .font(.title)
                         
-                        Text("\(String(describing: viewModel.user?.location))")
+                        Text("\(viewModel.user?.location.city.description ?? "City"), \(viewModel.user?.location.country.description ?? "Country")")
+                            
                     }
                     
                     Spacer()
@@ -47,6 +59,12 @@ struct ProfileView: View {
                         Button("Edit Profile") {
                             showEditProfileView = true
                         }
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(height: 40)
+                        .frame(maxWidth: 120)
+                        .background(Color.blue)
+                        .cornerRadius(20)
                     }
                     .navigationDestination(isPresented: $showEditProfileView) {
                         EditProfileView(showSignInView: $showSignInView)

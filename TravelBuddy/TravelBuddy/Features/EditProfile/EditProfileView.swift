@@ -14,6 +14,7 @@ struct EditProfileView: View {
     
     var body: some View {
         VStack {
+            
             NavigationStack {
                 Button("Log out") {
                     Task {

@@ -10,6 +10,7 @@ import SwiftUI
 struct RootView: View {
     
     @State private var showSignInView: Bool = false
+    @StateObject private var authUser = AuthDataResultModelEnvironmentVariable()
     
     var body: some View {
         ZStack{
@@ -20,17 +21,22 @@ struct RootView: View {
             }
         }
         .onAppear {
-            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
-            self.showSignInView = authUser == nil
+            guard let tmpAuthUser = try? AuthenticationManager.shared.getAuthenticatedUser() else {
+                self.showSignInView = true
+                return
+            }
+            authUser.saveAuthData(newAuthData: tmpAuthUser)
+            self.showSignInView = false
         }
         .fullScreenCover(isPresented: $showSignInView, content: {
             NavigationStack {
                 AuthenticationView(showSignInView: $showSignInView)
             }
         })
+        .environmentObject(authUser)
     }
 }
 
-#Preview {
-    RootView()
-}
+//#Preview {
+//    RootView()
+//}

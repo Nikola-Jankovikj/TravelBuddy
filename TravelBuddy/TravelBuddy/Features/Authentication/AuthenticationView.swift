@@ -18,9 +18,9 @@ struct AuthenticationView: View {
         VStack {
             
             NavigationLink {
-                SignInEmailView(showSignInView: $showSignInView)
+                SignUpEmailView(showSignInView: $showSignInView)
             } label: {
-                Text("Sign In With Email")
+                Text("Sign Up With Email")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(height: 55)
@@ -38,6 +38,12 @@ struct AuthenticationView: View {
                         print("error \(error)")
                     }
                 }
+            }
+            
+            NavigationLink {
+                LogInWithEmailView(showSignInView: $showSignInView)
+            } label: {
+                Text("Log in")
             }
             
         }

@@ -11,16 +11,20 @@ struct ProfileView: View {
     
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
+    @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
     
     var body: some View {
         VStack {
-            Button("Log out") {
-                Task {
-                    do {
-                        try viewModel.signOut()
-                        showSignInView = true
-                    } catch {
-                        print("Error \(error)")
+            
+            NavigationStack {
+                Button("Log out") {
+                    Task {
+                        do {
+                            try viewModel.signOut()
+                            showSignInView = true
+                        } catch {
+                            print("Error \(error)")
+                        }
                     }
                 }
             }
@@ -40,18 +44,22 @@ struct ProfileView: View {
             
             if let user = viewModel.user {
                 Text("UserId: \(user.id)")
+            } else {
+                Text("user is not found: \(String(describing: authUser.authData.uid))")
             }
         }
-        .task {
-            try? await viewModel.loadCurrentUser()
-            viewModel.loadAuthProviders()
+        .onAppear {
+            Task {
+                try? await viewModel.loadCurrentUser()
+                viewModel.loadAuthProviders()
+            }
         }
         .navigationTitle("Profile")
     }
 }
 
-#Preview {
-    NavigationStack {
-        ProfileView(showSignInView: .constant(false))
-    }
-}
+//#Preview {
+////    NavigationStack {
+////        ProfileView(showSignInView: .constant(false), authUser: AuthDataResultModel(user: null))
+////    }
+//}

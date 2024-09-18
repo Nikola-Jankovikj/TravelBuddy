@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateProfileView: View {
     @StateObject private var viewModel = CreateProfileViewModel()
-    @State private var isProfileCreated = false // Track if profile is created
+    @Binding public var showSignInView: Bool
 
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -18,45 +18,40 @@ struct CreateProfileView: View {
     }()
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                TextField("Name...", text: $viewModel.name)
-                    .padding()
-                    .background(Color.gray.opacity(0.4))
-                    .cornerRadius(10)
+        VStack {
+            TextField("Name...", text: $viewModel.name)
+                .padding()
+                .background(Color.gray.opacity(0.4))
+                .cornerRadius(10)
 
-                TextField("Favorite activity...", text: $viewModel.favoriteActivity)
-                    .padding()
-                    .background(Color.gray.opacity(0.4))
-                    .cornerRadius(10)
+            TextField("Favorite activity...", text: $viewModel.favoriteActivity)
+                .padding()
+                .background(Color.gray.opacity(0.4))
+                .cornerRadius(10)
 
-                TextField("Description...", text: $viewModel.description)
-                    .padding()
-                    .background(Color.gray.opacity(0.4))
-                    .cornerRadius(10)
+            TextField("Description...", text: $viewModel.description)
+                .padding()
+                .background(Color.gray.opacity(0.4))
+                .cornerRadius(10)
 
-                Stepper("\(viewModel.age) years old", value: $viewModel.age, in: 18...100)
-                    .padding()
+            Stepper("\(viewModel.age) years old", value: $viewModel.age, in: 18...100)
+                .padding()
 
-                Button("Create Profile") {
-                    Task {
-                        do {
-                            try viewModel.createProfile()
-                            isProfileCreated = true // Set to true when profile is successfully created
-                        } catch {
-                            print("Error \(error)")
-                        }
+            Button("Create Profile") {
+                Task {
+                    do {
+                        try viewModel.createProfile()
+                        showSignInView = false
+                    } catch {
+                        print("Error \(error)")
                     }
                 }
-                .navigationDestination(isPresented: $isProfileCreated) {
-                    ProfileView(showSignInView: .constant(false))
-                }
             }
-            .padding()
         }
+        .padding()
     }
 }
 
 #Preview {
-    CreateProfileView()
+    CreateProfileView(showSignInView: .constant(true))
 }

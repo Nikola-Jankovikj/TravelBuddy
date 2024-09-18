@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-struct AuthDataResultModel {
+class AuthDataResultModel {
     let uid: String
     let email: String?
     let photoUrl: String?
@@ -17,5 +17,11 @@ struct AuthDataResultModel {
         self.uid = user.uid
         self.email = user.email
         self.photoUrl = user.photoURL?.absoluteString
+    }
+    
+    init(uid: String, email: String, photoUrl: String) {
+        self.uid = uid
+        self.email = email
+        self.photoUrl = photoUrl
     }
 }

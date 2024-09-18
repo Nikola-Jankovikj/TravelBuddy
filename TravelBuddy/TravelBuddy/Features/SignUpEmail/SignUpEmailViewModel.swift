@@ -1,5 +1,5 @@
 //
-//  SignInEmailViewModel.swift
+//  SignUpEmailViewModel.swift
 //  TravelBuddy
 //
 //  Created by Nikola Jankovikj on 14.9.24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SignInEmailViewModel: ObservableObject {
+final class SignUpEmailViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
     

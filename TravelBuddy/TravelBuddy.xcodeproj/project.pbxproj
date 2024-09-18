@@ -11,6 +11,8 @@
 		F97D54112C9AFBC1005F10E9 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */; };
 		F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */; };
 		F97D54162C9B1E42005F10E9 /* ProfileHighlightedNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */; };
+		F97D541A2C9B44FA005F10E9 /* TmpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54192C9B44FA005F10E9 /* TmpView.swift */; };
+		F97D541C2C9B4519005F10E9 /* LocationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D541B2C9B4519005F10E9 /* LocationRequestView.swift */; };
 		F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
@@ -58,6 +60,8 @@
 		F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHighlightedNumberView.swift; sourceTree = "<group>"; };
+		F97D54192C9B44FA005F10E9 /* TmpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmpView.swift; sourceTree = "<group>"; };
+		F97D541B2C9B4519005F10E9 /* LocationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequestView.swift; sourceTree = "<group>"; };
 		F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelBuddyApp.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */,
+				F97D54192C9B44FA005F10E9 /* TmpView.swift */,
+				F97D541B2C9B4519005F10E9 /* LocationRequestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				F9DA7C952C9727D800B1CA46 /* CitySearchViewModel.swift in Sources */,
 				F9DA7C252C8E0F6A00B1CA46 /* DbUser.swift in Sources */,
 				F9DA7C7C2C960A8600B1CA46 /* AuthDataResultModel.swift in Sources */,
+				F97D541A2C9B44FA005F10E9 /* TmpView.swift in Sources */,
 				F9DA7C982C98B30C00B1CA46 /* LocationManager.swift in Sources */,
 				F9DA7C582C9301FF00B1CA46 /* AuthenticationView.swift in Sources */,
 				F97D54162C9B1E42005F10E9 /* ProfileHighlightedNumberView.swift in Sources */,
@@ -468,6 +475,7 @@
 				F9DA7C7E2C960AAA00B1CA46 /* AuthProviderOptions.swift in Sources */,
 				F9DA7C602C930CA500B1CA46 /* ProfileView.swift in Sources */,
 				F9DA7C6B2C9326C000B1CA46 /* Utilities.swift in Sources */,
+				F97D541C2C9B4519005F10E9 /* LocationRequestView.swift in Sources */,
 				F9DA7C5C2C93041900B1CA46 /* AuthenticationManager.swift in Sources */,
 				F9DA7C2F2C8E139D00B1CA46 /* Message.swift in Sources */,
 				F9DA7C352C8E141B00B1CA46 /* GroupChat.swift in Sources */,
@@ -614,6 +622,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravelBuddy/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -643,6 +652,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravelBuddy/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please allow us to access your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

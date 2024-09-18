@@ -25,39 +25,13 @@ struct SignUpEmailView: View {
                 .background(Color.gray.opacity(0.4))
                 .cornerRadius(10)
             
-//            Button {
-//                Task {
-//                    do {
-//                        try await viewModel.signUp()
-//                        showSignInView = false
-//                        return
-//                    } catch {
-//                        print(error)
-//                    }
-//                }
-//            } label: {
-//                Text("Sign Up")
-//                    .font(.headline)
-//                    .foregroundColor(.white)
-//                    .frame(height: 55)
-//                    .frame(maxWidth: .infinity)
-//                    .background(Color.blue)
-//                    .cornerRadius(10)
-//            }
             NavigationStack {
                 Button("Continue") {
-                    Task {
-                        do {
-                            try await viewModel.signUp()
-                            showCreateProfileView = true
-                        } catch {
-                            print(error)
-                        }
-                    }
+                    showCreateProfileView = true
                 }
             }
             .navigationDestination(isPresented: $showCreateProfileView) {
-                CreateProfileView(showSignInView: $showSignInView)
+                CreateProfileView(showSignInView: $showSignInView, email: $viewModel.email, password: $viewModel.password)
             }
         }
         .padding()

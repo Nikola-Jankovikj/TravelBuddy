@@ -10,58 +10,69 @@ import SwiftUI
 import CoreLocation
 import Combine
 
-class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    private var locationManager = CLLocationManager()
-    private let geocoder = CLGeocoder()
-    
-    @Published var location: CLLocation? = nil
-    @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
-    @Published var city: String? = nil
-    @Published var country: String? = nil
-    
+class LocationManager: NSObject, ObservableObject {
+    private let manager = CLLocationManager()
+    @Published var userLocation: CLLocation?
     static let shared = LocationManager()
-
-    private override init() {
+    @Published var city = ""
+    @Published var country = ""
+    
+    override init() {
         super.init()
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.requestAuthorization()
+        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.startUpdatingLocation()
     }
     
-    func requestAuthorization() {
-        self.locationManager.requestWhenInUseAuthorization()
+    func requestLocation() {
+        manager.requestWhenInUseAuthorization()
     }
-    
-    func startUpdatingLocation() {
-        self.locationManager.startUpdatingLocation()
-    }
-    
-    func stopUpdatingLocation() {
-        self.locationManager.stopUpdatingLocation()
-    }
-    
-    func reverseGeocode(location: CLLocation) {
-        geocoder.reverseGeocodeLocation(location) { placemarks, error in
-            if let error = error {
-                print("Error reverse geocoding location: \(error.localizedDescription)")
-                return
-            }
+}
+
+extension LocationManager: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
             
-            if let placemark = placemarks?.first {
-                self.city = placemark.locality
-                self.country = placemark.country
-            }
+        case .notDetermined:
+            print("Location not determined")
+        case .restricted:
+            print("Location restricted")
+        case .denied:
+            print("Location denied")
+        case .authorizedAlways:
+            print("Location authorized always")
+        case .authorizedWhenInUse:
+            print("Location authorized when in use")
+        @unknown default:
+            print("Location status unknown")
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let latestLocation = locations.last else { return }
-        self.location = latestLocation
-        
-        self.reverseGeocode(location: latestLocation)
+        print("did update locations with \(locations)")
+        guard let location = locations.last else { return }
+        self.userLocation = location
+        reverseGeocode()
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        self.authorizationStatus = manager.authorizationStatus
+    func reverseGeocode() {
+        if let userLocation {
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(userLocation) { [weak self] (placemarks, error) in
+                guard let self = self else { return }
+                if let error = error {
+                    print("Error during geocoding: \(error.localizedDescription)")
+                    return
+                }
+
+                if let placemark = placemarks?.first {
+                    self.city = placemark.locality ?? "Unknown city"
+                    self.country = placemark.country ?? "Unknown country"
+                }
+            }
+            
+        } else {
+            print("eeeete kaj pagja")
+        }
     }
 }

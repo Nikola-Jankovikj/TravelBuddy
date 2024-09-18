@@ -19,19 +19,19 @@ final class CreateProfileViewModel : ObservableObject {
     @Published var country = ""
     @Published var favoriteActivity = ""
     @Published var description = ""
+    @Published var location = Location(city: "", country: "")
     
     @Published var locationManager = LocationManager.shared
 
     func updateLocation() {
-        if let fetchedCity = locationManager.city, let fetchedCountry = locationManager.country {
-            self.city = fetchedCity
-            self.country = fetchedCountry
-        } else {
-            print("Location data not available yet.")
-        }
+        self.city = LocationManager.shared.city
+        self.country = LocationManager.shared.country
+        self.location = Location(city: city, country: country)
     }
 
     func createProfile() throws {
+        updateLocation()
+        
         let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
         
         let location = Location(city: city, country: country)
@@ -48,5 +48,21 @@ final class CreateProfileViewModel : ObservableObject {
         )
         
         try UserManager.shared.createNewUser(user: user)
+    }
+    
+    func updateLocationIfNeeded() {
+            self.city = LocationManager.shared.city
+            self.country = LocationManager.shared.country
+            self.location = Location(city: city, country: country)
+        }
+    
+    
+    func signUp(email: String, password: String) async throws { //add validation for email/password
+        guard !email.isEmpty, !password.isEmpty else {
+            print("No email or password fouond.")
+            return
+        }
+        
+        try await AuthenticationManager.shared.createUser(email: email, password: password)
     }
 }

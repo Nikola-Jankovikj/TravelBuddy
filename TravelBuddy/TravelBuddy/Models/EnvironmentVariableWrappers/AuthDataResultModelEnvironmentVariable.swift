@@ -8,13 +8,13 @@
 import Foundation
 
 class AuthDataResultModelEnvironmentVariable : ObservableObject {
-    @Published var authData: AuthDataResultModel
-    
-    init() { 
-        authData = AuthDataResultModel(uid: "-1", email: "nomail", photoUrl: "nophoto")
-    }
+    @Published var authData: AuthDataResultModel?
     
     func saveAuthData(newAuthData: AuthDataResultModel) {
         self.authData = newAuthData
+    }
+    
+    func removeAuthData() {
+        authData = nil
     }
 }

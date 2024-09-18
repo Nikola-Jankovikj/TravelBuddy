@@ -45,7 +45,7 @@ struct ProfileView: View {
             if let user = viewModel.user {
                 Text("UserId: \(user.id)")
             } else {
-                Text("user is not found: \(String(describing: authUser.authData.uid))")
+                Text("user is not found")
             }
         }
         .onAppear {
@@ -58,8 +58,9 @@ struct ProfileView: View {
     }
 }
 
-//#Preview {
-////    NavigationStack {
-////        ProfileView(showSignInView: .constant(false), authUser: AuthDataResultModel(user: null))
-////    }
-//}
+#Preview {
+    NavigationStack {
+        ProfileView(showSignInView: .constant(false))
+            .environmentObject(AuthDataResultModelEnvironmentVariable())
+    }
+}

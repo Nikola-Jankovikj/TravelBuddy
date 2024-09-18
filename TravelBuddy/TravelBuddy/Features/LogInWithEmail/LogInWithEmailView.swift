@@ -31,7 +31,6 @@ struct LogInWithEmailView: View {
                         try await viewModel.signIn()
                         let tmpAuthData = try AuthenticationManager.shared.getAuthenticatedUser()
                         authUser.saveAuthData(newAuthData: tmpAuthData)
-                        print("VO LOG IN: \(String(describing: authUser.authData.uid))")
                         showSignInView = false
                     } catch {
                         print(error)

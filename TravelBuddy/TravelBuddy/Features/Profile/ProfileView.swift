@@ -21,91 +21,26 @@ struct ProfileView: View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
-                    // Top Section (Photo Picker)
-                    ZStack {
-                        Color.red
-                            .ignoresSafeArea()
-                        
-                        PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
-                            if let imageData, let image = UIImage(data: imageData) {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: geometry.size.width)
-                            } else {
-                                Text("Select photos")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.black)
-                            }
-                        }
-                        .onChange(of: selectedItem) { oldValue, newValue in
-                            if let newValue {
-                                viewModel.saveProfileImage(item: newValue)
-                            }
-                        }
-                    }
-                    .frame(height: geometry.size.height / 2) // Top half of the screen
+                    ProfileImagePickerView(
+                        selectedItem: $selectedItem,
+                        imageData: $imageData,
+                        width: geometry.size.width,
+                        saveProfileImage: viewModel.saveProfileImage
+                    )
+                    .frame(height: geometry.size.height / 2)
                 }
                 
                 // Bottom Section (Profile Information)
-                VStack {
-                    HStack {
-                        Text("\(viewModel.user?.numberCompletedTrips.description ?? "0") completed trips")
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
-                        
-                        Spacer()
-                        
-                        Text("\(viewModel.user?.numberPhotosTaken.description ?? "0") photos taken")
-                            .padding(.horizontal)
-                        
-                        Spacer()
-                        
-                        Text("favorite activity \(viewModel.user?.favoriteActivity.description ?? "Nothing")")
-                    }
-                    .padding(.vertical)
-                    
-                    HStack {
-                        Spacer()
-                        
-                        VStack {
-                            Text("\(viewModel.user?.name.description ?? "Unknown"), \(viewModel.user?.age.description ?? "18")")
-                                .bold()
-                                .font(.title)
-                            
-                            Text("\(viewModel.user?.location.city.description ?? "City"), \(viewModel.user?.location.country.description ?? "Country")")
-                        }
-                        
-                        Spacer()
-                        
-                        NavigationStack {
-                            Button("Edit Profile") {
-                                showEditProfileView = true
-                            }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(height: 40)
-                            .frame(maxWidth: 120)
-                            .background(Color.blue)
-                            .cornerRadius(20)
-                        }
-                        .navigationDestination(isPresented: $showEditProfileView) {
-                            EditProfileView(showSignInView: $showSignInView)
-                        }
-                        
-                    }
-                    .padding(.vertical)
-                    .offset(y: -25)
-                    
-                    HStack {
-                        Text("\(viewModel.user?.description.description ?? "No description")")
-                            .multilineTextAlignment(.leading)
-                            .padding()
-                        
-                        Spacer()
-                    }
-                    .offset(y: -30)
-                }
+                ProfileInformationView(
+                    numberCompletedTrips: viewModel.user?.numberCompletedTrips ?? 0,
+                    numberPhotosTaken: viewModel.user?.numberPhotosTaken ?? 0,
+                    favoriteActivity: viewModel.user?.favoriteActivity ?? "Nothing",
+                    name: viewModel.user?.name ?? "Name",
+                    age: viewModel.user?.age ?? 18,
+                    location: viewModel.user?.location ?? Location(city: "Skopje", country: "Macedonia"),
+                    description: viewModel.user?.description ?? "No description",
+                    showEditProfileView: $showEditProfileView, 
+                    showSignInView: $showSignInView)
                 .frame(maxWidth: geometry.size.width)
                 .frame(height: geometry.size.height / 2)
                 .background(Color.white)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F940A8832C9C9BFB009E58B0 /* ProfileImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */; };
+		F940A8852C9CA0D8009E58B0 /* ProfileInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */; };
 		F97D540E2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */; };
 		F97D54112C9AFBC1005F10E9 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */; };
 		F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */; };
@@ -61,6 +63,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerView.swift; sourceTree = "<group>"; };
+		F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformationView.swift; sourceTree = "<group>"; };
 		F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModelEnvironmentVariable.swift; sourceTree = "<group>"; };
 		F97D54102C9AFBC1005F10E9 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		F97D54122C9AFBC9005F10E9 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */,
 				F97D54192C9B44FA005F10E9 /* TmpView.swift */,
 				F97D541B2C9B4519005F10E9 /* LocationRequestView.swift */,
+				F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */,
+				F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -511,6 +517,7 @@
 				F97D54162C9B1E42005F10E9 /* ProfileHighlightedNumberView.swift in Sources */,
 				F9DA7C932C9727D100B1CA46 /* CitySearchView.swift in Sources */,
 				F9DA7C722C9609C600B1CA46 /* SignUpEmailViewModel.swift in Sources */,
+				F940A8852C9CA0D8009E58B0 /* ProfileInformationView.swift in Sources */,
 				F9DA7C882C961B1D00B1CA46 /* UserManager.swift in Sources */,
 				F9DA7C802C960AC000B1CA46 /* GoogleSignInResultModel.swift in Sources */,
 				F9DA7C8E2C9707BF00B1CA46 /* CreateProfileView.swift in Sources */,
@@ -530,6 +537,7 @@
 				F9DA7C2F2C8E139D00B1CA46 /* Message.swift in Sources */,
 				F97D54222C9C400C005F10E9 /* TripsView.swift in Sources */,
 				F9DA7C352C8E141B00B1CA46 /* GroupChat.swift in Sources */,
+				F940A8832C9C9BFB009E58B0 /* ProfileImagePickerView.swift in Sources */,
 				F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */,
 				F9DA7C292C8E126A00B1CA46 /* Match.swift in Sources */,
 				F9DA7CA42C9A0B0800B1CA46 /* LogInWithEmailViewModel.swift in Sources */,

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+import PhotosUI
 
 @MainActor
 final class ProfileViewModel: ObservableObject {
@@ -38,5 +40,17 @@ final class ProfileViewModel: ObservableObject {
         }
         
         try await AuthenticationManager.shared.resetPassword(email: email)
+    }
+    
+    func saveProfileImage(item: PhotosPickerItem) {
+        guard let user else { return }
+        
+        Task {
+            guard let data = try await item.loadTransferable(type: Data.self) else { return }
+            let (path, name) = try await StorageManager.shared.saveImage(data: data, userId: user.id)
+            print("SUCCESS")
+            print(path)
+            print(name)
+        }
     }
 }

@@ -27,4 +27,10 @@ final class UserManager {
         return DbUserMapper.shared.mapSnapshotToDbUser(dict: data)
     }
     
+    func updateUserProfileImagePath(userId: String, path: String) async throws {
+        let data: [String:Any] = [
+            "images" : path
+        ]
+    }
+    
 }

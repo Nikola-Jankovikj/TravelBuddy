@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import PhotosUI
+
 
 struct ProfileView: View {
     
@@ -13,15 +15,25 @@ struct ProfileView: View {
     @Binding var showSignInView: Bool
     @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
     @State var showEditProfileView = false
+    @State private var selectedItem: PhotosPickerItem? = nil
     
     var body: some View {
         
         VStack {
             ZStack {
+                
+                
                 Color.red.ignoresSafeArea()
-                Text("Placeholder for image")
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
+                PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
+                    Text("Select photos")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                }
+                .onChange(of: selectedItem) { oldValue, newValue in
+                    if let newValue {
+                        viewModel.saveProfileImage(item: newValue)
+                    }
+                }
             }
             .frame(height: 300)
             

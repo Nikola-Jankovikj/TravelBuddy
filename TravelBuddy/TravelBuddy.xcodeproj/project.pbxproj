@@ -16,6 +16,8 @@
 		F97D541F2C9C3A64005F10E9 /* MainAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D541E2C9C3A63005F10E9 /* MainAppView.swift */; };
 		F97D54222C9C400C005F10E9 /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54212C9C400C005F10E9 /* TripsView.swift */; };
 		F97D54252C9C406B005F10E9 /* SwipingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54242C9C406B005F10E9 /* SwipingView.swift */; };
+		F97D54272C9C63AA005F10E9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F97D54262C9C63AA005F10E9 /* FirebaseStorage */; };
+		F97D542A2C9C63F3005F10E9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54292C9C63F3005F10E9 /* StorageManager.swift */; };
 		F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
@@ -68,6 +70,7 @@
 		F97D541E2C9C3A63005F10E9 /* MainAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppView.swift; sourceTree = "<group>"; };
 		F97D54212C9C400C005F10E9 /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
 		F97D54242C9C406B005F10E9 /* SwipingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingView.swift; sourceTree = "<group>"; };
+		F97D54292C9C63F3005F10E9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelBuddyApp.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 				F9DA7C632C93237300B1CA46 /* GoogleSignIn in Frameworks */,
 				F9DA7C832C96159A00B1CA46 /* FirebaseFirestore in Frameworks */,
 				F9DA7C652C93237300B1CA46 /* GoogleSignInSwift in Frameworks */,
+				F97D54272C9C63AA005F10E9 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +176,14 @@
 				F97D54242C9C406B005F10E9 /* SwipingView.swift */,
 			);
 			path = Swiping;
+			sourceTree = "<group>";
+		};
+		F97D54282C9C63E1005F10E9 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				F97D54292C9C63F3005F10E9 /* StorageManager.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		F9DA7C072C8DE42900B1CA46 = {
@@ -258,6 +270,7 @@
 		F9DA7C552C9301EE00B1CA46 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F97D54282C9C63E1005F10E9 /* Storage */,
 				F9DA7C962C98B2FE00B1CA46 /* Location */,
 				F9DA7C892C96287E00B1CA46 /* Mappers */,
 				F9DA7C862C961B1600B1CA46 /* Firestore */,
@@ -421,6 +434,7 @@
 				F9DA7C622C93237300B1CA46 /* GoogleSignIn */,
 				F9DA7C642C93237300B1CA46 /* GoogleSignInSwift */,
 				F9DA7C822C96159A00B1CA46 /* FirebaseFirestore */,
+				F97D54262C9C63AA005F10E9 /* FirebaseStorage */,
 			);
 			productName = TravelBuddy;
 			productReference = F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */;
@@ -503,6 +517,7 @@
 				F9DA7C6D2C932DA000B1CA46 /* SignInGoogleHelper.swift in Sources */,
 				F9DA7C752C9609F400B1CA46 /* AuthenticationViewModel.swift in Sources */,
 				F9DA7C2B2C8E128500B1CA46 /* Chat.swift in Sources */,
+				F97D542A2C9C63F3005F10E9 /* StorageManager.swift in Sources */,
 				F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */,
 				F9DA7C382C8E147500B1CA46 /* TripStatus.swift in Sources */,
 				F9DA7C322C8E13B200B1CA46 /* Location.swift in Sources */,
@@ -750,6 +765,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F97D54262C9C63AA005F10E9 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F9DA7C452C91FE1A00B1CA46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		F9DA7C462C91FE1A00B1CA46 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F9DA7C452C91FE1A00B1CA46 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

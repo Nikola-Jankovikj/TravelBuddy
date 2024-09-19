@@ -38,9 +38,8 @@ final class StorageManager {
         return (returnedPath, returnedName)
     }
     
-    func getData(userId: String, path: String) async throws -> Data {
-        try await userReference(userId: userId).child(path).data(maxSize: 3 * 1024 * 1024)
-        
+    func getData(userId: String, name: String) async throws -> Data {
+        try await userReference(userId: userId).child(name).data(maxSize: 3 * 1024 * 1024)
     }
     
 }

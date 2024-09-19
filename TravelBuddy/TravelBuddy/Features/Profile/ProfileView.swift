@@ -16,22 +16,27 @@ struct ProfileView: View {
     @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
     @State var showEditProfileView = false
     @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var imageData: Data? = nil
     
     var body: some View {
         
         VStack {
             ZStack {
-                
-                
-                Color.red.ignoresSafeArea()
-                PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
-                    Text("Select photos")
-                        .font(.largeTitle)
-                        .foregroundColor(.white)
-                }
-                .onChange(of: selectedItem) { oldValue, newValue in
-                    if let newValue {
-                        viewModel.saveProfileImage(item: newValue)
+                if let imageData, let image = UIImage(data: imageData) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                } else {
+                    Color.red.ignoresSafeArea()
+                    PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
+                        Text("Select photos")
+                            .font(.largeTitle)
+                            .foregroundColor(.white)
+                    }
+                    .onChange(of: selectedItem) { oldValue, newValue in
+                        if let newValue {
+                            viewModel.saveProfileImage(item: newValue)
+                        }
                     }
                 }
             }
@@ -106,6 +111,12 @@ struct ProfileView: View {
             Task {
                 do {
                     try await viewModel.loadCurrentUser()
+                    if let user = viewModel.user, let photos = viewModel.user?.personalPhotos {
+                        if !photos.isEmpty {
+                            let data = try await StorageManager.shared.getData(userId: user.id, name: photos[0])
+                            self.imageData = data
+                        }
+                    }
                 } catch {
                     print("error \(error)")
                 }

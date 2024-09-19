@@ -13,24 +13,30 @@ final class UserManager {
     static let shared = UserManager()
     private init() { }
     
+    private let userCollection = Firestore.firestore().collection("users")
+    
+    private func userDocument(userId: String) -> DocumentReference {
+        userCollection.document(userId)
+    }
+    
     func createNewUser(user: DbUser) throws {
-//        var user = DbUser(id: auth.uid, dateCreated: Date.now, dateUpdated: Date.now)
-//        let authDataResult = try await AuthenticationManager.shared.createUser(email: email, password: password)
-        try Firestore.firestore().collection("users").document(user.id).setData(from: user)
+//        try Firestore.firestore().collection("users").document(user.id).setData(from: user)
+        
+        try userDocument(userId: user.id).setData(from: user)
     }
     
     func getUser(userId: String) async throws -> DbUser {
-        let snapshot = try await Firestore.firestore().collection("users").document(userId).getDocument()
+        let snapshot = try await userDocument(userId: userId).getDocument()
         
         guard let data = snapshot.data() else { throw URLError(.badServerResponse) }
         
         return DbUserMapper.shared.mapSnapshotToDbUser(dict: data)
     }
     
-    func updateUserProfileImagePath(userId: String, path: String) async throws {
-        let data: [String:Any] = [
-            "images" : path
-        ]
+    func updateUserProfileImagePath(userId: String, name: String) async throws {
+        guard var user = try? await getUser(userId: userId) else { return }
+        user.personalPhotos.append(name)
+        try userDocument(userId: userId).setData(from: user)
     }
     
 }

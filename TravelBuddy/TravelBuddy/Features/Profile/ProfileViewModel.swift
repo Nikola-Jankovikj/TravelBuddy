@@ -48,9 +48,7 @@ final class ProfileViewModel: ObservableObject {
         Task {
             guard let data = try await item.loadTransferable(type: Data.self) else { return }
             let (path, name) = try await StorageManager.shared.saveImage(data: data, userId: user.id)
-            print("SUCCESS")
-            print(path)
-            print(name)
+            try await UserManager.shared.updateUserProfileImagePath(userId: user.id, name: name)
         }
     }
 }

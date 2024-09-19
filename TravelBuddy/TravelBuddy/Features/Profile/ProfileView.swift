@@ -23,7 +23,7 @@ struct ProfileView: View {
                     .font(.largeTitle)
                     .foregroundColor(.white)
             }
-//            .frame(height: 300)
+            .frame(height: 300)
             
             VStack {
                 HStack {
@@ -86,6 +86,9 @@ struct ProfileView: View {
                 }
             }
             .padding(.vertical)
+            
+            Spacer()
+            
         }
         .onAppear {
             Task {

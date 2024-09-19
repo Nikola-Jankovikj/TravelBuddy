@@ -17,12 +17,16 @@ struct ProfileView: View {
     var body: some View {
         
         VStack {
-            Image("image")
+            ZStack {
+                Color.red.ignoresSafeArea()
+                Text("Placeholder for image")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+            }
+//            .frame(height: 300)
             
             VStack {
                 HStack {
-                    Spacer()
-                    
                     Text("\(viewModel.user?.numberCompletedTrips.description ?? "0") completed trips")
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
@@ -50,7 +54,6 @@ struct ProfileView: View {
                             .font(.title)
                         
                         Text("\(viewModel.user?.location.city.description ?? "City"), \(viewModel.user?.location.country.description ?? "Country")")
-                            
                     }
                     
                     Spacer()
@@ -82,6 +85,7 @@ struct ProfileView: View {
                     Spacer()
                 }
             }
+            .padding(.vertical)
         }
         .onAppear {
             Task {

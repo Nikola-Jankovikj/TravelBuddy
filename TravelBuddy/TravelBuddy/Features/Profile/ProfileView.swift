@@ -30,7 +30,6 @@ struct ProfileView: View {
                     .frame(height: geometry.size.height / 2)
                 }
                 
-                // Bottom Section (Profile Information)
                 ProfileInformationView(
                     numberCompletedTrips: viewModel.user?.numberCompletedTrips ?? 0,
                     numberPhotosTaken: viewModel.user?.numberPhotosTaken ?? 0,
@@ -54,7 +53,7 @@ struct ProfileView: View {
                         try await viewModel.loadCurrentUser()
                         if let user = viewModel.user, let photos = viewModel.user?.personalPhotos {
                             if !photos.isEmpty {
-                                let data = try await StorageManager.shared.getData(userId: user.id, name: photos[0])
+                                let data = try await StorageManager.shared.getData(userId: user.id, name: photos.last!)
                                 self.imageData = data
                             }
                         }

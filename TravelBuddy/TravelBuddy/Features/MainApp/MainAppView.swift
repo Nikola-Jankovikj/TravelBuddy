@@ -16,7 +16,7 @@ struct MainAppView: View {
             TripsView()
                 .tabItem {
                     Image(systemName: "airplane")
-                    Text("Trips")
+                    Text("My Trips")
                 }
             
             SwipingView()

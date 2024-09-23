@@ -11,9 +11,19 @@ struct EditProfileView: View {
     
     @StateObject private var viewModel = EditProfileViewModel()
     @Binding var showSignInView: Bool
+    @State var showCameraView: Bool = false
     
     var body: some View {
         VStack {
+            
+            NavigationStack {
+                Button("Change Profile Picture") {
+                    showCameraView = true
+                }
+            }
+            .navigationDestination(isPresented: $showCameraView) {
+                CameraContentView()
+            }
             
             NavigationStack {
                 Button("Log out") {

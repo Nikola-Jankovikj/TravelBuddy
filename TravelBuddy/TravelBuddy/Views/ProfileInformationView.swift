@@ -19,8 +19,10 @@ struct ProfileInformationView: View {
     @Binding var showSignInView: Bool
     
     var body: some View {
+        
         VStack {
             HStack {
+                
                 Text("\(numberCompletedTrips) completed trips")
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
@@ -34,8 +36,8 @@ struct ProfileInformationView: View {
                 
                 Text("favorite activity \(favoriteActivity)")
             }
-            .padding(.vertical)
-            .offset(y: -20)
+            .padding(.bottom)
+            .offset(y: -50)
             
             HStack {
                 Spacer()

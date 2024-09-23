@@ -21,14 +21,23 @@ struct ProfileImagePickerView: View {
             Color.red
                 .ignoresSafeArea()
             
-            if let firstImageData = imageData.compactMap({ $0 }).first, let image = UIImage(data: firstImageData) {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxWidth: width)
-                    .onTapGesture {
-                        isShowingActionSheet = true
+            if !imageData.compactMap({ $0 }).isEmpty {
+                // Swipeable view of images
+                TabView {
+                    ForEach(imageData.compactMap { $0 }, id: \.self) { data in
+                        if let image = UIImage(data: data) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(maxWidth: width)
+                                .onTapGesture {
+                                    isShowingActionSheet = true
+                                }
+                        }
                     }
+                }
+                .tabViewStyle(PageTabViewStyle()) // Enable swipe functionality
+                .frame(maxWidth: width, maxHeight: width * 1.5) // Adjust as per your layout
             } else {
                 Text("Select photos")
                     .font(.largeTitle)
@@ -65,7 +74,7 @@ struct ProfileImagePickerView: View {
                 secondaryButton: .cancel()
             )
         }
-        .photosPicker(isPresented: $isShowingImagePicker, selection: $selectedItems, matching: .images) // Use PhotosPicker
+        .photosPicker(isPresented: $isShowingImagePicker, selection: $selectedItems, matching: .images)
         .onChange(of: selectedItems) { newItems in
             imageData.removeAll()
             Task {
@@ -76,8 +85,8 @@ struct ProfileImagePickerView: View {
                             saveProfileImage(data)
                         }
                     }
-                }else {
-                    print("asdasd ej padna")
+                } else {
+                    print("Error deleting images")
                 }
             }
         }
@@ -90,7 +99,6 @@ struct ProfileImagePickerView: View {
         switch cameraAuthStatus {
         case .authorized:
             isUsingCamera = true
-            // Use UIImagePickerController for camera usage
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
                 DispatchQueue.main.async {
@@ -116,7 +124,7 @@ struct ProfileImagePickerView: View {
         imageData: .constant([]),
         width: 300,
         saveProfileImages: { _ in },
-        saveProfileImage: {selectedItem in },
+        saveProfileImage: { _ in },
         deleteImages: {}
     )
 }

@@ -22,7 +22,7 @@ struct MainAppView: View {
             SwipingView()
                 .tabItem {
                     Image(systemName: "globe")
-//                    Text("Browse")
+                    Text("Browse")
                 }
             
             ProfileView(showSignInView: $showSignInView)

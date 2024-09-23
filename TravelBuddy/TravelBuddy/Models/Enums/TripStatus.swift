@@ -7,8 +7,9 @@
 
 import Foundation
 
-enum TripStatus : Codable {
-    case planned
-    case completed
-    case cancelled
+enum TripStatus : String, CaseIterable, Identifiable, Codable{
+    case planned = "Planned"
+    case completed = "Completed"
+    case cancelled = "Cancelled"
+    var id: String { self.rawValue }
 }

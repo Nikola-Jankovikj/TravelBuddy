@@ -14,18 +14,20 @@ struct ProfileView: View {
     @Binding var showSignInView: Bool
     @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
     @State var showEditProfileView = false
-    @State private var selectedItem: PhotosPickerItem? = nil
-    @State private var imageData: Data? = nil
+    @State private var selectedItem: [PhotosPickerItem] = []
+    @State private var imageData: [Data?] = []
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
                 VStack {
                     ProfileImagePickerView(
-                        selectedItem: $selectedItem,
+                        selectedItems: $selectedItem,
                         imageData: $imageData,
                         width: geometry.size.width,
-                        saveProfileImage: viewModel.saveProfileImage
+                        saveProfileImages: viewModel.saveProfileImages,
+                        saveProfileImage: viewModel.saveProfileImage,
+                        deleteImages: viewModel.deletePhotos
                     )
                     .frame(height: geometry.size.height / 2)
                 }
@@ -54,7 +56,7 @@ struct ProfileView: View {
                         if let user = viewModel.user, let photos = viewModel.user?.personalPhotos {
                             if !photos.isEmpty {
                                 let data = try await StorageManager.shared.getData(userId: user.id, name: photos.last!)
-                                self.imageData = data
+                                self.imageData = [data]
                             }
                         }
                     } catch {

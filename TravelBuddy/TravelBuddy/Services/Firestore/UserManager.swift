@@ -39,4 +39,10 @@ final class UserManager {
         try userDocument(userId: userId).setData(from: user)
     }
     
+    func deletePhotos(userId: String) async throws {
+        guard var user = try? await getUser(userId: userId) else { return }
+        user.personalPhotos = []
+        try userDocument(userId: userId).setData(from: user)
+    }
+    
 }

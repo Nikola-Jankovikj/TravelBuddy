@@ -1,20 +1,15 @@
-//
-//  ProfileImagePickerView.swift
-//  TravelBuddy
-//
-//  Created by Nikola Jankovikj on 19.9.24.
-//
-
 import SwiftUI
 import PhotosUI
 import AVFoundation
 import UIKit
 
 struct ProfileImagePickerView: View {
-    @Binding var selectedItem: PhotosPickerItem?
-    @Binding var imageData: Data?
+    @Binding var selectedItems: [PhotosPickerItem]
+    @Binding var imageData: [Data?]
     var width: CGFloat
+    var saveProfileImages: @MainActor (_ selectedItems: [Data]) -> Void
     var saveProfileImage: @MainActor (_ selectedItem: Data) -> Void
+    var deleteImages: @MainActor () async throws -> Void
     
     @State private var isShowingActionSheet = false
     @State private var isShowingImagePicker = false
@@ -26,7 +21,7 @@ struct ProfileImagePickerView: View {
             Color.red
                 .ignoresSafeArea()
             
-            if let imageData, let image = UIImage(data: imageData) {
+            if let firstImageData = imageData.compactMap({ $0 }).first, let image = UIImage(data: firstImageData) {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
@@ -70,11 +65,19 @@ struct ProfileImagePickerView: View {
                 secondaryButton: .cancel()
             )
         }
-        .sheet(isPresented: $isShowingImagePicker) {
-            ImagePicker(sourceType: isUsingCamera ? .camera : .photoLibrary) { image in
-                if let data = image.jpegData(compressionQuality: 0.8) {
-                    self.imageData = data
-                    saveProfileImage(data)
+        .photosPicker(isPresented: $isShowingImagePicker, selection: $selectedItems, matching: .images) // Use PhotosPicker
+        .onChange(of: selectedItems) { newItems in
+            imageData.removeAll()
+            Task {
+                if let _ = try? await deleteImages() {
+                    for item in selectedItems {
+                        if let data = try? await item.loadTransferable(type: Data.self) {
+                            imageData.append(data)
+                            saveProfileImage(data)
+                        }
+                    }
+                }else {
+                    print("asdasd ej padna")
                 }
             }
         }
@@ -86,78 +89,34 @@ struct ProfileImagePickerView: View {
         
         switch cameraAuthStatus {
         case .authorized:
-            // Camera access is authorized, proceed to use the camera
             isUsingCamera = true
-            isShowingImagePicker = true
-            
+            // Use UIImagePickerController for camera usage
         case .notDetermined:
-            // The user has not been prompted yet. Request access.
             AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if granted {
                         isUsingCamera = true
-                        isShowingImagePicker = true
-                    }
-                } else {
-                    DispatchQueue.main.async {
+                    } else {
                         cameraPermissionDenied = true
                     }
                 }
             }
-            
         case .denied, .restricted:
-            // The user has previously denied camera access or it is restricted.
             cameraPermissionDenied = true
-            
         @unknown default:
             print("Unknown camera authorization status.")
         }
     }
 }
 
-// ImagePicker to handle both camera and library selection
-struct ImagePicker: UIViewControllerRepresentable {
-    var sourceType: UIImagePickerController.SourceType
-    var completionHandler: (UIImage) -> Void
-
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.sourceType = sourceType
-        picker.delegate = context.coordinator
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) { }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        var parent: ImagePicker
-
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            if let image = info[.originalImage] as? UIImage {
-                parent.completionHandler(image)
-            }
-            picker.dismiss(animated: true)
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true)
-        }
-    }
-}
-
+// #Preview
 #Preview {
     ProfileImagePickerView(
-        selectedItem: .constant(nil),
-        imageData: .constant(nil),
+        selectedItems: .constant([]),
+        imageData: .constant([]),
         width: 300,
-        saveProfileImage: { _ in }
+        saveProfileImages: { _ in },
+        saveProfileImage: {selectedItem in },
+        deleteImages: {}
     )
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F908622D2CA1EB93001156A0 /* ImageSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F908622C2CA1EB93001156A0 /* ImageSliderView.swift */; };
+		F908622F2CA1EBAB001156A0 /* ImagePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F908622E2CA1EBAB001156A0 /* ImagePlaceholderView.swift */; };
+		F90862312CA1EBC1001156A0 /* ActionSheetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90862302CA1EBC1001156A0 /* ActionSheetContentView.swift */; };
+		F90862332CA1EBDD001156A0 /* CameraImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90862322CA1EBDD001156A0 /* CameraImagePickerView.swift */; };
 		F940A8832C9C9BFB009E58B0 /* ProfileImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */; };
 		F940A8852C9CA0D8009E58B0 /* ProfileInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */; };
 		F97D540E2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */; };
@@ -63,6 +67,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F908622C2CA1EB93001156A0 /* ImageSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSliderView.swift; sourceTree = "<group>"; };
+		F908622E2CA1EBAB001156A0 /* ImagePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlaceholderView.swift; sourceTree = "<group>"; };
+		F90862302CA1EBC1001156A0 /* ActionSheetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetContentView.swift; sourceTree = "<group>"; };
+		F90862322CA1EBDD001156A0 /* CameraImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraImagePickerView.swift; sourceTree = "<group>"; };
 		F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerView.swift; sourceTree = "<group>"; };
 		F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformationView.swift; sourceTree = "<group>"; };
 		F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModelEnvironmentVariable.swift; sourceTree = "<group>"; };
@@ -131,6 +139,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F908622B2CA1EB6A001156A0 /* ProfileHelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */,
+				F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */,
+				F908622C2CA1EB93001156A0 /* ImageSliderView.swift */,
+				F908622E2CA1EBAB001156A0 /* ImagePlaceholderView.swift */,
+				F90862302CA1EBC1001156A0 /* ActionSheetContentView.swift */,
+				F90862322CA1EBDD001156A0 /* CameraImagePickerView.swift */,
+			);
+			path = ProfileHelperViews;
+			sourceTree = "<group>";
+		};
 		F97D540C2C9AE4E6005F10E9 /* EnvironmentVariableWrappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,8 +175,6 @@
 				F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */,
 				F97D54192C9B44FA005F10E9 /* TmpView.swift */,
 				F97D541B2C9B4519005F10E9 /* LocationRequestView.swift */,
-				F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */,
-				F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -352,6 +371,7 @@
 		F9DA7C772C960A0F00B1CA46 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				F908622B2CA1EB6A001156A0 /* ProfileHelperViews */,
 				F9DA7C5F2C930CA500B1CA46 /* ProfileView.swift */,
 				F9DA7C782C960A2600B1CA46 /* ProfileViewModel.swift */,
 			);
@@ -507,6 +527,7 @@
 				F9DA7C792C960A2600B1CA46 /* ProfileViewModel.swift in Sources */,
 				F9DA7C5A2C9302E500B1CA46 /* SignUpEmailView.swift in Sources */,
 				F9DA7CA22C9A0AEE00B1CA46 /* LogInWithEmailView.swift in Sources */,
+				F908622D2CA1EB93001156A0 /* ImageSliderView.swift in Sources */,
 				F9DA7C952C9727D800B1CA46 /* CitySearchViewModel.swift in Sources */,
 				F9DA7C252C8E0F6A00B1CA46 /* DbUser.swift in Sources */,
 				F9DA7C7C2C960A8600B1CA46 /* AuthDataResultModel.swift in Sources */,
@@ -521,8 +542,10 @@
 				F9DA7C882C961B1D00B1CA46 /* UserManager.swift in Sources */,
 				F9DA7C802C960AC000B1CA46 /* GoogleSignInResultModel.swift in Sources */,
 				F9DA7C8E2C9707BF00B1CA46 /* CreateProfileView.swift in Sources */,
+				F90862332CA1EBDD001156A0 /* CameraImagePickerView.swift in Sources */,
 				F9DA7C6D2C932DA000B1CA46 /* SignInGoogleHelper.swift in Sources */,
 				F9DA7C752C9609F400B1CA46 /* AuthenticationViewModel.swift in Sources */,
+				F908622F2CA1EBAB001156A0 /* ImagePlaceholderView.swift in Sources */,
 				F9DA7C2B2C8E128500B1CA46 /* Chat.swift in Sources */,
 				F97D542A2C9C63F3005F10E9 /* StorageManager.swift in Sources */,
 				F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */,
@@ -538,6 +561,7 @@
 				F97D54222C9C400C005F10E9 /* TripsView.swift in Sources */,
 				F9DA7C352C8E141B00B1CA46 /* GroupChat.swift in Sources */,
 				F940A8832C9C9BFB009E58B0 /* ProfileImagePickerView.swift in Sources */,
+				F90862312CA1EBC1001156A0 /* ActionSheetContentView.swift in Sources */,
 				F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */,
 				F9DA7C292C8E126A00B1CA46 /* Match.swift in Sources */,
 				F9DA7CA42C9A0B0800B1CA46 /* LogInWithEmailViewModel.swift in Sources */,

@@ -33,14 +33,8 @@ struct ProfileView: View {
                 }
                 
                 ProfileInformationView(
-                    numberCompletedTrips: viewModel.user?.numberCompletedTrips ?? 0,
-                    numberPhotosTaken: viewModel.user?.numberPhotosTaken ?? 0,
-                    favoriteActivity: viewModel.user?.favoriteActivity ?? "Nothing",
-                    name: viewModel.user?.name ?? "Name",
-                    age: viewModel.user?.age ?? 18,
-                    location: viewModel.user?.location ?? Location(city: "Skopje", country: "Macedonia"),
-                    description: viewModel.user?.description ?? "No description",
-                    showEditProfileView: $showEditProfileView, 
+                    user: viewModel.user ?? DbUser(id: "0", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", favoriteActivity: "Activity", dateCreated: Date.now, dateUpdated: Date.now),
+                    showEditProfileView: $showEditProfileView,
                     showSignInView: $showSignInView)
                 .frame(maxWidth: geometry.size.width)
                 .frame(height: geometry.size.height / 2)

@@ -8,13 +8,7 @@
 import SwiftUI
 
 struct ProfileInformationView: View {
-    var numberCompletedTrips: Int
-    var numberPhotosTaken: Int
-    var favoriteActivity: String
-    var name: String
-    var age: Int
-    var location: Location
-    var description: String
+    var user: DbUser
     @Binding var showEditProfileView: Bool
     @Binding var showSignInView: Bool
     
@@ -22,32 +16,34 @@ struct ProfileInformationView: View {
         
         VStack {
             HStack {
-                
-                Text("\(numberCompletedTrips) completed trips")
+                Text("\(user.numberCompletedTrips)\ncompleted\ntrips")
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
                 Spacer()
                 
-                Text("\(numberPhotosTaken) photos taken")
+                Text("\(user.numberPhotosTaken)\nphotos\ntaken")
+                    .multilineTextAlignment(.center)
                     .padding(.horizontal)
                 
                 Spacer()
                 
-                Text("favorite activity \(favoriteActivity)")
+                Text("favorite\nactivity\n\(user.favoriteActivity)")
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
             }
-            .padding(.bottom)
+            .padding(.top)
             .offset(y: -50)
             
             HStack {
                 Spacer()
                 
                 VStack {
-                    Text("\(name), \(age)")
+                    Text("\(user.name), \(user.age)")
                         .bold()
                         .font(.title)
                     
-                    Text("\(location.city), \(location.country)")
+                    Text("\(user.location.city), \(user.location.country)")
                 }
                 
                 Spacer()
@@ -68,11 +64,11 @@ struct ProfileInformationView: View {
                 }
                 
             }
-            .padding(.vertical)
+            .padding(.bottom)
             .offset(y: -25)
             
             HStack {
-                Text("\(description)")
+                Text("\(user.description)")
                     .multilineTextAlignment(.leading)
                     .padding()
                 
@@ -84,5 +80,5 @@ struct ProfileInformationView: View {
 }
 
 #Preview {
-    ProfileInformationView(numberCompletedTrips: 0, numberPhotosTaken: 0, favoriteActivity: "Coding", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", showEditProfileView: .constant(false), showSignInView: .constant(false))
+    ProfileInformationView(user: DbUser(id: "0", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", favoriteActivity: "Activity", dateCreated: Date.now, dateUpdated: Date.now), showEditProfileView: .constant(false), showSignInView: .constant(false))
 }

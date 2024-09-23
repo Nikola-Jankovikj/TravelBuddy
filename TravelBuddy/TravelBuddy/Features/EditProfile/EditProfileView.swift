@@ -16,14 +16,14 @@ struct EditProfileView: View {
     var body: some View {
         VStack {
             
-            NavigationStack {
-                Button("Change Profile Picture") {
-                    showCameraView = true
-                }
-            }
-            .navigationDestination(isPresented: $showCameraView) {
-                CameraContentView()
-            }
+//            NavigationStack {
+//                Button("Change Profile Picture") {
+//                    showCameraView = true
+//                }
+//            }
+//            .navigationDestination(isPresented: $showCameraView) {
+//                CameraContentView()
+//            }
             
             NavigationStack {
                 Button("Log out") {

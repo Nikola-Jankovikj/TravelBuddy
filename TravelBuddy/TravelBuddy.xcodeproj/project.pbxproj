@@ -11,6 +11,7 @@
 		F908622F2CA1EBAB001156A0 /* ImagePlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F908622E2CA1EBAB001156A0 /* ImagePlaceholderView.swift */; };
 		F90862312CA1EBC1001156A0 /* ActionSheetContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90862302CA1EBC1001156A0 /* ActionSheetContentView.swift */; };
 		F90862332CA1EBDD001156A0 /* CameraImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90862322CA1EBDD001156A0 /* CameraImagePickerView.swift */; };
+		F90862362CA1F3BC001156A0 /* ShakeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90862352CA1F3BC001156A0 /* ShakeGesture.swift */; };
 		F940A8832C9C9BFB009E58B0 /* ProfileImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */; };
 		F940A8852C9CA0D8009E58B0 /* ProfileInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */; };
 		F97D540E2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */; };
@@ -71,6 +72,8 @@
 		F908622E2CA1EBAB001156A0 /* ImagePlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePlaceholderView.swift; sourceTree = "<group>"; };
 		F90862302CA1EBC1001156A0 /* ActionSheetContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetContentView.swift; sourceTree = "<group>"; };
 		F90862322CA1EBDD001156A0 /* CameraImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraImagePickerView.swift; sourceTree = "<group>"; };
+		F90862352CA1F3BC001156A0 /* ShakeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeGesture.swift; sourceTree = "<group>"; };
+		F90862372CA1F58B001156A0 /* TravelBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TravelBuddy.entitlements; sourceTree = "<group>"; };
 		F940A8822C9C9BFB009E58B0 /* ProfileImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImagePickerView.swift; sourceTree = "<group>"; };
 		F940A8842C9CA0D8009E58B0 /* ProfileInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformationView.swift; sourceTree = "<group>"; };
 		F97D540D2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataResultModelEnvironmentVariable.swift; sourceTree = "<group>"; };
@@ -152,6 +155,14 @@
 			path = ProfileHelperViews;
 			sourceTree = "<group>";
 		};
+		F90862342CA1F3A4001156A0 /* Shake */ = {
+			isa = PBXGroup;
+			children = (
+				F90862352CA1F3BC001156A0 /* ShakeGesture.swift */,
+			);
+			path = Shake;
+			sourceTree = "<group>";
+		};
 		F97D540C2C9AE4E6005F10E9 /* EnvironmentVariableWrappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +242,7 @@
 		F9DA7C122C8DE42900B1CA46 /* TravelBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				F90862372CA1F58B001156A0 /* TravelBuddy.entitlements */,
 				F97D54142C9B1E12005F10E9 /* Views */,
 				F9DA7C6F2C96097E00B1CA46 /* Features */,
 				F9DA7C692C9326B200B1CA46 /* Utilities */,
@@ -327,6 +339,7 @@
 		F9DA7C6F2C96097E00B1CA46 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				F90862342CA1F3A4001156A0 /* Shake */,
 				F97D54232C9C405C005F10E9 /* Swiping */,
 				F97D54202C9C3FFF005F10E9 /* Trips */,
 				F97D541D2C9C3A31005F10E9 /* MainApp */,
@@ -530,6 +543,7 @@
 				F908622D2CA1EB93001156A0 /* ImageSliderView.swift in Sources */,
 				F9DA7C952C9727D800B1CA46 /* CitySearchViewModel.swift in Sources */,
 				F9DA7C252C8E0F6A00B1CA46 /* DbUser.swift in Sources */,
+				F90862362CA1F3BC001156A0 /* ShakeGesture.swift in Sources */,
 				F9DA7C7C2C960A8600B1CA46 /* AuthDataResultModel.swift in Sources */,
 				F97D54252C9C406B005F10E9 /* SwipingView.swift in Sources */,
 				F97D541A2C9B44FA005F10E9 /* TmpView.swift in Sources */,
@@ -699,9 +713,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TravelBuddy/TravelBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TravelBuddy/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravelBuddy/Info.plist;
@@ -729,9 +745,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TravelBuddy/TravelBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TravelBuddy/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TravelBuddy/Info.plist;

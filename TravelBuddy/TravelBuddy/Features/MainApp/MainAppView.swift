@@ -36,8 +36,10 @@ struct MainAppView: View {
         .alert(isPresented: $showAlert) {
             Alert(
                 title: Text("Shake Detected"),
-                message: Text("We are happy you are enjoying our app!"),
-                dismissButton: .default(Text("OK"))
+                message: Text("A reminder has been sent for 5 minutes from now!"),
+                dismissButton: .default(Text("Ok"), action: {
+                    NotificationManager.instance.scheduleNotifications()
+                })
             )
         }
         .background(ShakeDetector(showAlert: $showAlert))

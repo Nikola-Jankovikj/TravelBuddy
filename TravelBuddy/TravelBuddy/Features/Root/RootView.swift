@@ -21,6 +21,8 @@ struct RootView: View {
             }
         }
         .onAppear {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            
             guard let tmpAuthUser = try? AuthenticationManager.shared.getAuthenticatedUser() else {
                 self.showSignInView = true
                 return

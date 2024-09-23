@@ -53,6 +53,7 @@ struct CreateProfileView: View {
                 .padding()
 
             Button("Create Profile") {
+                NotificationManager.instance.requestAuthorization()
                 Task {
                     do {
                         try await viewModel.signUp(email: email, password: password)

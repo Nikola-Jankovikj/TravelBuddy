@@ -47,10 +47,10 @@ struct ProfileView: View {
                 Task {
                     do {
                         try await viewModel.loadCurrentUser()
-                        if let user = viewModel.user, let photos = viewModel.user?.personalPhotos {
-                            if !photos.isEmpty {
-                                let data = try await StorageManager.shared.getData(userId: user.id, name: photos.last!)
-                                self.imageData = [data]
+                        if let user = viewModel.user {
+                            if !user.personalPhotos.isEmpty {
+                                let data = try await StorageManager.shared.getAllData(userId: user.id)
+                                self.imageData = data
                             }
                         }
                     } catch {

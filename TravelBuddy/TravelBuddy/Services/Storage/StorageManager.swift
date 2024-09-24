@@ -67,6 +67,16 @@ final class StorageManager {
         try await userReference(userId: userId).child(name).data(maxSize: 3 * 1024 * 1024)
     }
     
+    func getAllData(userId: String) async throws -> [Data] {
+        var data: [Data] = []
+        let allPhotos = try await userReference(userId: userId).listAll()
+        for photoRef in allPhotos.items {
+            let photoData = try await photoRef.data(maxSize: 3 * 1280 * 1280)
+            data.append(photoData)
+        }
+        return data
+    }
+    
     func deleteImages(userId: String) async throws {
         let userImagesRef = userReference(userId: userId)
 

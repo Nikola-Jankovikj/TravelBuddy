@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 
+@MainActor
 class CompletedTripsViewModel: ObservableObject {
     @Published var completedTrips: [Trip] = []
     @Published var isLoading = false

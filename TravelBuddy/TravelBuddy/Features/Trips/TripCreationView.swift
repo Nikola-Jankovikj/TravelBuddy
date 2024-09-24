@@ -7,115 +7,86 @@
 
 import SwiftUI
 import Firebase
-import FirebaseAuth
 
 struct TripCreationView: View {
-    @State private var city: String = ""
-    @State private var country: String = ""
-    @State private var dateFrom = Date()
-    @State private var dateTo = Date()
-    @State private var selectedActivities: Set<Activity> = []
-    @State private var isLoading = false
-    @State private var errorMessage: String?
+    @StateObject private var viewModel: TripCreationViewModel
 
-    var onTripCreated: (Trip) -> Void
-    
+    init(onTripCreated: @escaping (Trip) -> Void) {
+        _viewModel = StateObject(wrappedValue: TripCreationViewModel(onTripCreated: onTripCreated))
+    }
+
     var body: some View {
         VStack {
-            TextField("City", text: $city)
+            Text("Create New Trip")
+                .font(.largeTitle)
+                .padding(.bottom, 20)
+
+            // City and Country Fields
+            TextField("City", text: $viewModel.city)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
 
-            TextField("Country", text: $country)
+            TextField("Country", text: $viewModel.country)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
 
-            DatePicker("Date From", selection: $dateFrom, displayedComponents: .date)
+            // DatePickers for From and To Dates
+            DatePicker("Date From", selection: $viewModel.dateFrom, in: Date()..., displayedComponents: .date)
                 .padding()
 
-            DatePicker("Date To", selection: $dateTo, displayedComponents: .date)
+            DatePicker("Date To", selection: $viewModel.dateTo, in: viewModel.dateFrom..., displayedComponents: .date)
                 .padding()
 
+            // Activities Section
             Text("Preferred Activities")
                 .font(.headline)
                 .padding(.top)
 
             ForEach(Activity.allCases, id: \.self) { activity in
-                MultipleSelectionRow(activity: activity, isSelected: selectedActivities.contains(activity)) {
-                    if selectedActivities.contains(activity) {
-                        selectedActivities.remove(activity)
+                MultipleSelectionRow(activity: activity, isSelected: viewModel.selectedActivities.contains(activity)) {
+                    if viewModel.selectedActivities.contains(activity) {
+                        viewModel.selectedActivities.remove(activity)
                     } else {
-                        selectedActivities.insert(activity)
+                        viewModel.selectedActivities.insert(activity)
                     }
                 }
             }
+            .padding(.horizontal)
 
-            if let errorMessage = errorMessage {
+            // Error message display
+            if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
                     .foregroundColor(.red)
                     .padding()
             }
 
-            Button(action: createTrip) {
-                if isLoading {
+            // Create Trip Button
+            Button(action: {
+                Task {
+                    await viewModel.createTrip()
+                }
+            }) {
+                if viewModel.isLoading {
                     ProgressView()
                 } else {
                     Text("Create Trip")
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(viewModel.isValidTrip ? Color.blue : Color.gray)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
             }
-            .disabled(isLoading)
+            .disabled(viewModel.isLoading || !viewModel.isValidTrip)
             .padding(.top)
         }
         .padding()
-    }
-
-    private func createTrip() {
-        // Check if inputs are valid
-        guard !city.isEmpty && !country.isEmpty else {
-            errorMessage = "Please fill in all the fields."
-            return
-        }
-        errorMessage = nil
-        isLoading = true
-
-        // Get current user's ID
-        guard let userId = Auth.auth().currentUser?.uid else {
-            errorMessage = "Unable to get user ID."
-            isLoading = false
-            return
-        }
-
-        // Create the trip object
-        let newTrip = Trip(
-            id: UUID().uuidString,
-            destination: Location(city: city, country: country),
-            startDate: dateFrom,
-            endDate: dateTo,
-            activities: Array(selectedActivities),
-            createdByUserID: userId,
-            participantIDs: [],
-            photos: [],
-            videos: [],
-            status: .planned
-        )
-
-        // Use TripManager to save the trip
-        do {
-            try TripManager.shared.createNewTrip(trip: newTrip)
-            onTripCreated(newTrip)
-        } catch {
-            errorMessage = "Failed to create trip: \(error.localizedDescription)"
-        }
-        isLoading = false
+        .navigationBarTitle("New Trip", displayMode: .inline)
     }
 }
 
+// MARK: - MultipleSelectionRow
 
 struct MultipleSelectionRow: View {
     var activity: Activity
@@ -132,5 +103,16 @@ struct MultipleSelectionRow: View {
                 }
             }
         }
+        .padding()
+        .background(Color(.systemGray6))
+        .cornerRadius(8)
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    TripCreationView { newTrip in
+        print("New trip created: \(newTrip)")
     }
 }

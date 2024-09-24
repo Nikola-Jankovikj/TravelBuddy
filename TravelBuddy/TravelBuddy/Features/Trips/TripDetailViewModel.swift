@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class TripDetailViewModel: ObservableObject {
     @Published var trip: Trip
     @Published var isLoading = false

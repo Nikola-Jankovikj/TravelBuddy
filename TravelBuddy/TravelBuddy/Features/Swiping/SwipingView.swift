@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct SwipingView: View {
+    @StateObject private var viewModel = SwipingViewModel()
+    
     var body: some View {
-        Text("Swiping View")
+        VStack {
+            CitySearchView()
+            
+            Text("Location: \(viewModel.location)")
+            
+        }
     }
 }
 

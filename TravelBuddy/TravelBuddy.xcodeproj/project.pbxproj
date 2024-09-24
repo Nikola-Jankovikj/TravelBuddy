@@ -41,6 +41,8 @@
 		F97D54272C9C63AA005F10E9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F97D54262C9C63AA005F10E9 /* FirebaseStorage */; };
 		F97D542A2C9C63F3005F10E9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97D54292C9C63F3005F10E9 /* StorageManager.swift */; };
 		F9B56F682CA3157000FBED6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B56F672CA3157000FBED6F /* GoogleService-Info.plist */; };
+		F9B56F6A2CA3551000FBED6F /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B56F692CA3551000FBED6F /* CitySearchView.swift */; };
+		F9B56F6C2CA35C4C00FBED6F /* SwipingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B56F6B2CA35C4C00FBED6F /* SwipingViewModel.swift */; };
 		F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
@@ -74,8 +76,6 @@
 		F9DA7C8B2C96288900B1CA46 /* DbUserMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C8A2C96288900B1CA46 /* DbUserMapper.swift */; };
 		F9DA7C8E2C9707BF00B1CA46 /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C8D2C9707BF00B1CA46 /* CreateProfileView.swift */; };
 		F9DA7C902C9707C800B1CA46 /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C8F2C9707C800B1CA46 /* CreateProfileViewModel.swift */; };
-		F9DA7C932C9727D100B1CA46 /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C922C9727D100B1CA46 /* CitySearchView.swift */; };
-		F9DA7C952C9727D800B1CA46 /* CitySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C942C9727D800B1CA46 /* CitySearchViewModel.swift */; };
 		F9DA7C982C98B30C00B1CA46 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C972C98B30C00B1CA46 /* LocationManager.swift */; };
 		F9DA7CA22C9A0AEE00B1CA46 /* LogInWithEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7CA12C9A0AED00B1CA46 /* LogInWithEmailView.swift */; };
 		F9DA7CA42C9A0B0800B1CA46 /* LogInWithEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7CA32C9A0B0800B1CA46 /* LogInWithEmailViewModel.swift */; };
@@ -115,6 +115,8 @@
 		F97D54242C9C406B005F10E9 /* SwipingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingView.swift; sourceTree = "<group>"; };
 		F97D54292C9C63F3005F10E9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		F9B56F672CA3157000FBED6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F9B56F692CA3551000FBED6F /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
+		F9B56F6B2CA35C4C00FBED6F /* SwipingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingViewModel.swift; sourceTree = "<group>"; };
 		F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelBuddyApp.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,8 +148,6 @@
 		F9DA7C8A2C96288900B1CA46 /* DbUserMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbUserMapper.swift; sourceTree = "<group>"; };
 		F9DA7C8D2C9707BF00B1CA46 /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
 		F9DA7C8F2C9707C800B1CA46 /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
-		F9DA7C922C9727D100B1CA46 /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
-		F9DA7C942C9727D800B1CA46 /* CitySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchViewModel.swift; sourceTree = "<group>"; };
 		F9DA7C972C98B30C00B1CA46 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		F9DA7CA12C9A0AED00B1CA46 /* LogInWithEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInWithEmailView.swift; sourceTree = "<group>"; };
 		F9DA7CA32C9A0B0800B1CA46 /* LogInWithEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInWithEmailViewModel.swift; sourceTree = "<group>"; };
@@ -238,6 +238,7 @@
 				F97D54152C9B1E41005F10E9 /* ProfileHighlightedNumberView.swift */,
 				F97D54192C9B44FA005F10E9 /* TmpView.swift */,
 				F97D541B2C9B4519005F10E9 /* LocationRequestView.swift */,
+				F9B56F692CA3551000FBED6F /* CitySearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				F97D54242C9C406B005F10E9 /* SwipingView.swift */,
+				F9B56F6B2CA35C4C00FBED6F /* SwipingViewModel.swift */,
 			);
 			path = Swiping;
 			sourceTree = "<group>";
@@ -408,7 +410,6 @@
 				F97D541D2C9C3A31005F10E9 /* MainApp */,
 				F97D540F2C9AFBB5005F10E9 /* EditProfile */,
 				F9DA7CA02C9A0ADF00B1CA46 /* LogInWithEmail */,
-				F9DA7C912C9727C700B1CA46 /* CitySearch */,
 				F9DA7C8C2C9707AF00B1CA46 /* CreateProfile */,
 				F9DA7C772C960A0F00B1CA46 /* Profile */,
 				F9DA7C762C960A0300B1CA46 /* Root */,
@@ -489,15 +490,6 @@
 				F9DA7C8F2C9707C800B1CA46 /* CreateProfileViewModel.swift */,
 			);
 			path = CreateProfile;
-			sourceTree = "<group>";
-		};
-		F9DA7C912C9727C700B1CA46 /* CitySearch */ = {
-			isa = PBXGroup;
-			children = (
-				F9DA7C922C9727D100B1CA46 /* CitySearchView.swift */,
-				F9DA7C942C9727D800B1CA46 /* CitySearchViewModel.swift */,
-			);
-			path = CitySearch;
 			sourceTree = "<group>";
 		};
 		F9DA7C962C98B2FE00B1CA46 /* Location */ = {
@@ -608,7 +600,6 @@
 				F9DA7C5A2C9302E500B1CA46 /* SignUpEmailView.swift in Sources */,
 				F9DA7CA22C9A0AEE00B1CA46 /* LogInWithEmailView.swift in Sources */,
 				F908622D2CA1EB93001156A0 /* ImageSliderView.swift in Sources */,
-				F9DA7C952C9727D800B1CA46 /* CitySearchViewModel.swift in Sources */,
 				F9DA7C252C8E0F6A00B1CA46 /* DbUser.swift in Sources */,
 				F90862362CA1F3BC001156A0 /* ShakeGesture.swift in Sources */,
 				F9DA7C7C2C960A8600B1CA46 /* AuthDataResultModel.swift in Sources */,
@@ -618,7 +609,6 @@
 				F9DA7C582C9301FF00B1CA46 /* AuthenticationView.swift in Sources */,
 				D5F6C8DA2CA04BD4002A0410 /* Activitiy.swift in Sources */,
 				F97D54162C9B1E42005F10E9 /* ProfileHighlightedNumberView.swift in Sources */,
-				F9DA7C932C9727D100B1CA46 /* CitySearchView.swift in Sources */,
 				F9DA7C722C9609C600B1CA46 /* SignUpEmailViewModel.swift in Sources */,
 				F940A8852C9CA0D8009E58B0 /* ProfileInformationView.swift in Sources */,
 				F9DA7C882C961B1D00B1CA46 /* UserManager.swift in Sources */,
@@ -633,8 +623,10 @@
 				F9DA7C2B2C8E128500B1CA46 /* Chat.swift in Sources */,
 				F97D542A2C9C63F3005F10E9 /* StorageManager.swift in Sources */,
 				D5F6C8F62CA09977002A0410 /* CompletedTripsViewModel.swift in Sources */,
+				F9B56F6C2CA35C4C00FBED6F /* SwipingViewModel.swift in Sources */,
 				F97D54132C9AFBC9005F10E9 /* EditProfileView.swift in Sources */,
 				F9DA7C382C8E147500B1CA46 /* TripStatus.swift in Sources */,
+				F9B56F6A2CA3551000FBED6F /* CitySearchView.swift in Sources */,
 				D5F6C8E82CA08E2A002A0410 /* TripManager.swift in Sources */,
 				F9DA7C322C8E13B200B1CA46 /* Location.swift in Sources */,
 				F9DA7C7E2C960AAA00B1CA46 /* AuthProviderOptions.swift in Sources */,

@@ -13,14 +13,18 @@ import PhotosUI
 final class ProfileViewModel: ObservableObject {
     
     @Published var authProviders: [AuthProviderOption] = []
-    @Published private(set) var user: DbUser? = nil
+//    @Published private(set) var user: DbUser
+//    
+//    init(user: DbUser) {
+//        self.user = user
+//    }
+//    
     
-    
-    func loadCurrentUser() async throws {
-        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
-        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
-        print("user here is: \(String(describing: self.user))")
-    }
+//    func loadCurrentUser() async throws {
+//        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+//        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+//        print("user here is: \(String(describing: self.user))")
+//    }
     
     func loadAuthProviders() {
         if let providers = try? AuthenticationManager.shared.getProviders() {
@@ -42,8 +46,8 @@ final class ProfileViewModel: ObservableObject {
         try await AuthenticationManager.shared.resetPassword(email: email)
     }
     
-    func saveProfileImage(data: Data) {
-        guard let user else { return }
+    func saveProfileImage(user: DbUser, data: Data) {
+//        guard let user else { return }
         
         Task {
 //            guard let data = try await item.loadTransferable(type: Data.self) else { return }
@@ -53,8 +57,8 @@ final class ProfileViewModel: ObservableObject {
         }
     }
 
-    func saveProfileImages(data: [Data]) {
-        guard let user else { return }
+    func saveProfileImages(user: DbUser, data: [Data]) {
+//        guard let user else { return }
         
         Task {
 //            guard let data = try await item.loadTransferable(type: Data.self) else { return }
@@ -76,8 +80,8 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     
-    func deletePhotos() async throws {
-        guard let user else { return }
+    func deletePhotos(user: DbUser) async throws {
+//        guard let user else { return }
         
         try await UserManager.shared.deletePhotos(userId: user.id)
         try await StorageManager.shared.deleteImages(userId: user.id)

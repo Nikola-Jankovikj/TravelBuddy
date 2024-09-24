@@ -3,11 +3,12 @@ import PhotosUI
 
 struct ProfileImagePickerView: View {
     @Binding var selectedItems: [PhotosPickerItem]
-    @Binding var imageData: [Data?]
+    @Binding var imageData: [Data]
+    var user: DbUser
     var width: CGFloat
-    var saveProfileImages: @MainActor (_ selectedItems: [Data]) -> Void
-    var saveProfileImage: @MainActor (_ selectedItem: Data) -> Void
-    var deleteImages: @MainActor () async throws -> Void
+    var saveProfileImages: @MainActor (_ user: DbUser, _ selectedItems: [Data]) -> Void
+    var saveProfileImage: @MainActor (_ user: DbUser, _ selectedItem: Data) -> Void
+    var deleteImages: @MainActor (_ user: DbUser) async throws -> Void
     
     @State var isShowingActionSheet = false
     @State var isShowingImagePicker = false
@@ -45,11 +46,11 @@ struct ProfileImagePickerView: View {
     private func handleSelectedItems() {
         imageData.removeAll()
         Task {
-            if let _ = try? await deleteImages() {
+            if let _ = try? await deleteImages(user) {
                 for item in selectedItems {
                     if let data = try? await item.loadTransferable(type: Data.self) {
                         imageData.append(data)
-                        await saveProfileImage(data)
+                        await saveProfileImage(user, data)
                     }
                 }
             } else {

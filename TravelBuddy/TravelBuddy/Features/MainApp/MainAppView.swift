@@ -10,6 +10,8 @@ import SwiftUI
 struct MainAppView: View {
     @Binding var showSignInView: Bool
     @State var showAlert: Bool = false
+    @Binding var imageData: [Data]
+    var user: DbUser
     
     var body: some View {
         TabView {
@@ -23,10 +25,9 @@ struct MainAppView: View {
             SwipingView()
                 .tabItem {
                     Image(systemName: "globe")
-//                    Text("Browse")
                 }
             
-            ProfileView(showSignInView: $showSignInView)
+            ProfileView(user: user, showSignInView: $showSignInView, imageData: $imageData)
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
@@ -46,6 +47,6 @@ struct MainAppView: View {
     }
 }
 
-#Preview {
-    MainAppView(showSignInView: .constant(false))
-}
+//#Preview {
+//    MainAppView(showSignInView: .constant(false))
+//}

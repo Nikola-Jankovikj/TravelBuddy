@@ -9,33 +9,43 @@ import SwiftUI
 
 struct RootView: View {
     
-    @State private var showSignInView: Bool = false
-    @StateObject private var authUser = AuthDataResultModelEnvironmentVariable()
+    @StateObject private var viewModel = RootViewModel()
     
     var body: some View {
         ZStack{
-            if !showSignInView {
-                NavigationStack {
-                    MainAppView(showSignInView: $showSignInView)
+            if !viewModel.showSignInView {
+                
+                if viewModel.showLoadingScreen {
+                    NavigationStack {
+                        LoadingView()
+                            .onAppear() {
+                                Task {
+                                    try await viewModel.fetchData()
+                                }
+                            }
+                    }
+                }
+                
+                if viewModel.isDataFetched {
+                    NavigationStack {
+                        MainAppView(showSignInView: $viewModel.showSignInView, imageData: $viewModel.imageData, user: viewModel.retreiveUser())
+                    }
                 }
             }
         }
         .onAppear {
             UIApplication.shared.applicationIconBadgeNumber = 0
-            
-            guard let tmpAuthUser = try? AuthenticationManager.shared.getAuthenticatedUser() else {
-                self.showSignInView = true
-                return
-            }
-            authUser.saveAuthData(newAuthData: tmpAuthUser)
-            self.showSignInView = false
+            viewModel.checkLogin()
         }
-        .fullScreenCover(isPresented: $showSignInView, content: {
+        .fullScreenCover(isPresented: $viewModel.showSignInView, content: {
             NavigationStack {
-                AuthenticationView(showSignInView: $showSignInView)
+                AuthenticationView(showSignInView: $viewModel.showSignInView)
+                    .onDisappear() {
+                        viewModel.isDataFetched = false
+                        viewModel.showLoadingScreen = true
+                    }
             }
         })
-        .environmentObject(authUser)
     }
 }
 

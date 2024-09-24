@@ -10,7 +10,7 @@ import SwiftUI
 struct LogInWithEmailView: View {
     
     @StateObject private var viewModel = LogInWithEmailViewModel()
-    @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
+//    @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
     @Binding var showSignInView: Bool
 
     var body: some View {
@@ -29,8 +29,8 @@ struct LogInWithEmailView: View {
                 Task {
                     do {
                         try await viewModel.signIn()
-                        let tmpAuthData = try AuthenticationManager.shared.getAuthenticatedUser()
-                        authUser.saveAuthData(newAuthData: tmpAuthData)
+//                        let tmpAuthData = try AuthenticationManager.shared.getAuthenticatedUser()
+//                        authUser.saveAuthData(newAuthData: tmpAuthData)
                         showSignInView = false
                     } catch {
                         print(error)
@@ -52,5 +52,5 @@ struct LogInWithEmailView: View {
 
 #Preview {
     LogInWithEmailView(showSignInView: .constant(true))
-        .environmentObject(AuthDataResultModelEnvironmentVariable())
+//        .environmentObject(AuthDataResultModelEnvironmentVariable())
 }

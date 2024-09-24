@@ -10,12 +10,12 @@ import PhotosUI
 
 struct ProfileView: View {
     
+    var user: DbUser
     @StateObject private var viewModel = ProfileViewModel()
     @Binding var showSignInView: Bool
-    @EnvironmentObject var authUser: AuthDataResultModelEnvironmentVariable
     @State var showEditProfileView = false
     @State private var selectedItem: [PhotosPickerItem] = []
-    @State private var imageData: [Data?] = []
+    @Binding var imageData: [Data]
     
     var body: some View {
         GeometryReader { geometry in
@@ -24,6 +24,7 @@ struct ProfileView: View {
                     ProfileImagePickerView(
                         selectedItems: $selectedItem,
                         imageData: $imageData,
+                        user: user,
                         width: geometry.size.width,
                         saveProfileImages: viewModel.saveProfileImages,
                         saveProfileImage: viewModel.saveProfileImage,
@@ -33,7 +34,7 @@ struct ProfileView: View {
                 }
                 
                 ProfileInformationView(
-                    user: viewModel.user ?? DbUser(id: "0", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", favoriteActivity: "Activity", dateCreated: Date.now, dateUpdated: Date.now),
+                    user: user,
                     showEditProfileView: $showEditProfileView,
                     showSignInView: $showSignInView)
                 .frame(maxWidth: geometry.size.width)
@@ -46,12 +47,9 @@ struct ProfileView: View {
             .onAppear {
                 Task {
                     do {
-                        try await viewModel.loadCurrentUser()
-                        if let user = viewModel.user {
-                            if !user.personalPhotos.isEmpty {
-                                let data = try await StorageManager.shared.getAllData(userId: user.id)
-                                self.imageData = data
-                            }
+                        if !user.personalPhotos.isEmpty {
+                            let data = try await StorageManager.shared.getAllData(userId: user.id)
+                            self.imageData = data
                         }
                     } catch {
                         print("error \(error)")
@@ -61,10 +59,10 @@ struct ProfileView: View {
         }
     }
 }
-
-#Preview {
-    NavigationStack {
-        ProfileView(showSignInView: .constant(false))
-            .environmentObject(AuthDataResultModelEnvironmentVariable())
-    }
-}
+//
+//#Preview {
+//    NavigationStack {
+//        ProfileView(showSignInView: .constant(false))
+//            .environmentObject(AuthDataResultModelEnvironmentVariable())
+//    }
+//}

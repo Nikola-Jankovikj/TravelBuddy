@@ -52,8 +52,8 @@ struct AuthenticationView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        AuthenticationView(showSignInView: .constant(false))
-    }
-}
+//#Preview {
+//    NavigationStack {
+//        AuthenticationView(showSignInView: .constant(false))
+//    }
+//}

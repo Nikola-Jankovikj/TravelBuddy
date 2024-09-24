@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 struct ImageSliderView: View {
-    @Binding var imageData: [Data?]
+    @Binding var imageData: [Data]
     var width: CGFloat
     
     var body: some View {

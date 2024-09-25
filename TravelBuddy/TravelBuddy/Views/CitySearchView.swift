@@ -13,6 +13,8 @@ struct CitySearchView: View {
     @State private var matchingCities: [MKMapItem] = []
     @State private var selectedCity: (city: String, country: String)? = nil
     @FocusState private var isSearchBarFocused: Bool // 1. Focus state for search bar
+    @Binding var showCitySearchView: Bool
+    @Binding var location: Location
     
     var body: some View {
         NavigationView {
@@ -74,7 +76,9 @@ struct CitySearchView: View {
     // Function to handle city selection
     func selectCity(_ city: MKMapItem) {
         if let cityName = city.placemark.locality, let countryName = city.placemark.country {
-            self.selectedCity = (city: cityName, country: countryName)
+//            self.selectedCity = (city: cityName, country: countryName)
+            location = Location(city: cityName, country: countryName)
+            showCitySearchView = false
         }
         self.searchText = "" // Clear the search text after selecting a city
         self.matchingCities = [] // Clear the results after selection
@@ -82,8 +86,8 @@ struct CitySearchView: View {
     }
 }
 
-struct CitySearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        CitySearchView()
-    }
-}
+//struct CitySearchView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CitySearchView()
+//    }
+//}

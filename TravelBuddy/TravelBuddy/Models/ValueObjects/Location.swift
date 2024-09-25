@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct Location : Codable {
+struct Location : Codable, CustomStringConvertible {
+    public var description: String  { return "\(city), \(country)" }
+    
     var city: String
     var country: String
 }

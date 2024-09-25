@@ -44,6 +44,7 @@
 		F9B56F682CA3157000FBED6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B56F672CA3157000FBED6F /* GoogleService-Info.plist */; };
 		F9B56F6A2CA3551000FBED6F /* CitySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B56F692CA3551000FBED6F /* CitySearchView.swift */; };
 		F9B56F6C2CA35C4C00FBED6F /* SwipingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B56F6B2CA35C4C00FBED6F /* SwipingViewModel.swift */; };
+		F9BF30C82CA4448B009F3F5D /* SwipingFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF30C72CA4448B009F3F5D /* SwipingFilterView.swift */; };
 		F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
@@ -119,6 +120,7 @@
 		F9B56F672CA3157000FBED6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9B56F692CA3551000FBED6F /* CitySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySearchView.swift; sourceTree = "<group>"; };
 		F9B56F6B2CA35C4C00FBED6F /* SwipingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingViewModel.swift; sourceTree = "<group>"; };
+		F9BF30C72CA4448B009F3F5D /* SwipingFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingFilterView.swift; sourceTree = "<group>"; };
 		F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelBuddyApp.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 			children = (
 				F97D54242C9C406B005F10E9 /* SwipingView.swift */,
 				F9B56F6B2CA35C4C00FBED6F /* SwipingViewModel.swift */,
+				F9BF30C72CA4448B009F3F5D /* SwipingFilterView.swift */,
 			);
 			path = Swiping;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				F9DA7C6B2C9326C000B1CA46 /* Utilities.swift in Sources */,
 				F97D541C2C9B4519005F10E9 /* LocationRequestView.swift in Sources */,
 				F94A75FA2CA2CD560088F17E /* RootViewModel.swift in Sources */,
+				F9BF30C82CA4448B009F3F5D /* SwipingFilterView.swift in Sources */,
 				F97D541F2C9C3A64005F10E9 /* MainAppView.swift in Sources */,
 				F9DA7C5C2C93041900B1CA46 /* AuthenticationManager.swift in Sources */,
 				F9DA7C2F2C8E139D00B1CA46 /* Message.swift in Sources */,

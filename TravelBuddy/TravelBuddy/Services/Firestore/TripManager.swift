@@ -33,6 +33,78 @@ final class TripManager {
         return try TripMapper.shared.mapSnapshotToTrip(dict: data)
     }
     
+    func convertStringsToActivities(tripActivityStrings: [String]) -> [Activity] {
+        return tripActivityStrings.compactMap { activityString in
+            return Activity.allCases.first { $0.rawValue == activityString }
+        }
+    }
+
+    func filterTrips(documents: [QueryDocumentSnapshot], activities: Set<Activity>) -> [Trip] {
+        return documents.compactMap { document -> Trip? in
+            let data = document.data()
+            let tripActivityStrings = data["activities"] as? [String] ?? []
+            let tripActivities = convertStringsToActivities(tripActivityStrings: tripActivityStrings)
+            let activitySet = Set(tripActivities)
+            
+            if activitySet.isSuperset(of: activities) {
+                return try? document.data(as: Trip.self)
+            }
+            return nil
+        }
+    }
+
+    func executeQueryWithFilter(query: Query, activities: Set<Activity>, completion: @escaping ([Trip]?, Error?) -> Void) {
+        query.getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                completion(nil, nil)
+                return
+            }
+            
+            let filteredTrips = self.filterTrips(documents: documents, activities: activities)
+            completion(filteredTrips, nil)
+        }
+    }
+
+    func fetchAllTripsWithFilters(location: Location, dateFrom: Date, dateTo: Date, activities: Set<Activity>, completion: @escaping ([Trip]?, Error?) -> Void) {
+        var destination = [String: String]()
+        destination["city"] = location.city
+        destination["country"] = location.country
+
+        let firstQuery = tripCollection
+            .whereField("destination", isEqualTo: destination)
+            .whereField("startDate", isLessThan: Timestamp(date: dateFrom))
+            .whereField("endDate", isGreaterThan: Timestamp(date: dateFrom))
+        
+        executeQueryWithFilter(query: firstQuery, activities: activities) { firstFilteredTrips, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            let secondQuery = self.tripCollection
+                .whereField("destination", isEqualTo: destination)
+                .whereField("startDate", isGreaterThan: Timestamp(date: dateFrom))
+                .whereField("startDate", isLessThan: Timestamp(date: dateTo))
+                .whereField("endDate", isGreaterThan: Timestamp(date: dateFrom))
+            
+            self.executeQueryWithFilter(query: secondQuery, activities: activities) { secondFilteredTrips, error in
+                if let error = error {
+                    completion(nil, error)
+                    return
+                }
+                
+                let allTrips = (firstFilteredTrips ?? []) + (secondFilteredTrips ?? [])
+                
+                completion(allTrips, nil)
+            }
+        }
+    }
+    
     // Fetch all trips for a specific user
     func getTripsForUser(userId: String) async throws -> [Trip] {
         let snapshot = try await tripCollection

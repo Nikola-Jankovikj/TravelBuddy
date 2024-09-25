@@ -111,8 +111,8 @@ struct MultipleSelectionRow: View {
 
 // MARK: - Preview
 
-#Preview {
-    TripCreationView { newTrip in
-        print("New trip created: \(newTrip)")
-    }
-}
+//#Preview {
+//    TripCreationView { newTrip in
+//        print("New trip created: \(newTrip)")
+//    }
+//}

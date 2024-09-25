@@ -11,19 +11,32 @@ struct EditProfileView: View {
     
     @StateObject private var viewModel = EditProfileViewModel()
     @Binding var showSignInView: Bool
+    var user: DbUser
     @State var showCameraView: Bool = false
+    @State var showPlacesVisitedView: Bool = false
+    @State var cities: [Location] = []
     
     var body: some View {
         VStack {
             
-//            NavigationStack {
-//                Button("Change Profile Picture") {
-//                    showCameraView = true
-//                }
-//            }
-//            .navigationDestination(isPresented: $showCameraView) {
-//                CameraContentView()
-//            }
+            NavigationStack {
+                Button("See places visited") {
+                    Task {
+                        if let completedTrips = try? await TripManager.shared.getCompletedTripsForUser(userId: user.id) {
+                            cities = completedTrips.map({ trip in
+                                trip.destination
+                            })
+                        }
+                        else{
+                            cities = []
+                        }
+                        showPlacesVisitedView = true
+                    }
+                }
+            }
+            .navigationDestination(isPresented: $showPlacesVisitedView) {
+                PlacesVisitedView(cities: cities)
+            }
             
             NavigationStack {
                 Button("Log out") {
@@ -51,16 +64,10 @@ struct EditProfileView: View {
                 }
             }
         }
-        .onAppear {
-//            Task {
-//                try? await viewModel.loadCurrentUser()
-                viewModel.loadAuthProviders()
-//            }
-        }
         .navigationTitle("Profile")
     }
 }
 
-#Preview {
-    EditProfileView(showSignInView: .constant(false))
-}
+//#Preview {
+//    EditProfileView(showSignInView: .constant(false))
+//}

@@ -58,9 +58,10 @@ struct ProfileInformationView: View {
                     .frame(maxWidth: 120)
                     .background(Color.blue)
                     .cornerRadius(20)
+                    .padding(.trailing)
                 }
                 .navigationDestination(isPresented: $showEditProfileView) {
-                    EditProfileView(showSignInView: $showSignInView)
+                    EditProfileView(showSignInView: $showSignInView, user: user)
                 }
                 
             }

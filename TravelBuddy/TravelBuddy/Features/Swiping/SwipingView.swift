@@ -29,7 +29,9 @@ struct SwipingView: View {
                 SwipingFilterView(viewModel: viewModel, showSwipingFilterView: $showSwipingFilterView)
             }
             
-            Text("Trips: \(viewModel.trips)")
+            ForEach(viewModel.trips){trip in
+                    
+            }
         }
     }
 }

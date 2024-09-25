@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D5892B722CA35A90006E2418 /* TripCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5892B712CA35A90006E2418 /* TripCreationViewModel.swift */; };
 		D5F6C8D82C9EDCF4002A0410 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		D5F6C8DA2CA04BD4002A0410 /* Activitiy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6C8D92CA04BD4002A0410 /* Activitiy.swift */; };
 		D5F6C8E62CA08AA0002A0410 /* TripCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6C8E52CA08AA0002A0410 /* TripCreationView.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D5892B712CA35A90006E2418 /* TripCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCreationViewModel.swift; sourceTree = "<group>"; };
 		D5F6C8D92CA04BD4002A0410 /* Activitiy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activitiy.swift; sourceTree = "<group>"; };
 		D5F6C8E52CA08AA0002A0410 /* TripCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCreationView.swift; sourceTree = "<group>"; };
 		D5F6C8E72CA08E2A002A0410 /* TripManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManager.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				D5F6C8F12CA092A2002A0410 /* TripDetailView.swift */,
 				D5F6C8F52CA09977002A0410 /* CompletedTripsViewModel.swift */,
 				D5F6C8F72CA0998A002A0410 /* CompletedTripsView.swift */,
+				D5892B712CA35A90006E2418 /* TripCreationViewModel.swift */,
 			);
 			path = Trips;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */,
 				D5F6C8F82CA0998A002A0410 /* CompletedTripsView.swift in Sources */,
 				F9DA7C292C8E126A00B1CA46 /* Match.swift in Sources */,
+				D5892B722CA35A90006E2418 /* TripCreationViewModel.swift in Sources */,
 				F94A75F82CA2C8820088F17E /* LoadingView.swift in Sources */,
 				F9DA7CA42C9A0B0800B1CA46 /* LogInWithEmailViewModel.swift in Sources */,
 				F9DA7C5E2C930A6100B1CA46 /* RootView.swift in Sources */,

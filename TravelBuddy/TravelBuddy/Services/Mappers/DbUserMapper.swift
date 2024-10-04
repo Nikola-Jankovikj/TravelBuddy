@@ -32,8 +32,8 @@ class DbUserMapper {
         let numberCompletedTrips = dict["numberCompletedTrips"] as? Int ?? 0
         let numberPhotosTaken = dict["numberPhotosTaken"] as? Int ?? 0
         let favoriteActivity = dict["favoriteActivity"] as? String ?? "None"
-        let likedUserIds = dict["likedUserIds"] as? [String] ?? []
-        let rejectedUserIds = dict["rejectedUserIds"] as? [String] ?? []
+        let likedTripIds = dict["likedTripIds"] as? [String] ?? []
+        let rejectedTripIds = dict["rejectedTripIds"] as? [String] ?? []
         
         let dateCreated: Date
         if let dateCreatedStr = dict["dateCreated"] as? String, let date = ISO8601DateFormatter().date(from: dateCreatedStr) {
@@ -59,8 +59,8 @@ class DbUserMapper {
             numberCompletedTrips: numberCompletedTrips,
             numberPhotosTaken: numberPhotosTaken,
             favoriteActivity: favoriteActivity,
-            likedUserIds: likedUserIds,
-            rejectedUserIds: rejectedUserIds,
+            likedTripIds: likedTripIds,
+            rejectedTripIds: rejectedTripIds,
             dateCreated: dateCreated,
             dateUpdated: dateUpdated
         )

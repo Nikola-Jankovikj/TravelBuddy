@@ -49,6 +49,7 @@
 		F9BF30CC2CA49C87009F3F5D /* TripCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF30CB2CA49C87009F3F5D /* TripCardViewModel.swift */; };
 		F9BF30CE2CA4A221009F3F5D /* PlacesVisitedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF30CD2CA4A221009F3F5D /* PlacesVisitedView.swift */; };
 		F9BF30D22CA4B7DD009F3F5D /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BF30D12CA4B7DD009F3F5D /* MapView.swift */; };
+		F9D751252CA82F8100F3A1D4 /* SwipingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D751242CA82F8000F3A1D4 /* SwipingCardView.swift */; };
 		F9DA7C142C8DE42900B1CA46 /* TravelBuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */; };
 		F9DA7C1A2C8DE42B00B1CA46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */; };
 		F9DA7C1D2C8DE42B00B1CA46 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9DA7C1C2C8DE42B00B1CA46 /* Preview Assets.xcassets */; };
@@ -129,6 +130,7 @@
 		F9BF30CB2CA49C87009F3F5D /* TripCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCardViewModel.swift; sourceTree = "<group>"; };
 		F9BF30CD2CA4A221009F3F5D /* PlacesVisitedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesVisitedView.swift; sourceTree = "<group>"; };
 		F9BF30D12CA4B7DD009F3F5D /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		F9D751242CA82F8000F3A1D4 /* SwipingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingCardView.swift; sourceTree = "<group>"; };
 		F9DA7C102C8DE42900B1CA46 /* TravelBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9DA7C132C8DE42900B1CA46 /* TravelBuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelBuddyApp.swift; sourceTree = "<group>"; };
 		F9DA7C192C8DE42B00B1CA46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				F9BF30C72CA4448B009F3F5D /* SwipingFilterView.swift */,
 				F9BF30C92CA49784009F3F5D /* TripCardView.swift */,
 				F9BF30CB2CA49C87009F3F5D /* TripCardViewModel.swift */,
+				F9D751242CA82F8000F3A1D4 /* SwipingCardView.swift */,
 			);
 			path = Swiping;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				F97D540E2C9AE509005F10E9 /* AuthDataResultModelEnvironmentVariable.swift in Sources */,
 				F9DA7C8B2C96288900B1CA46 /* DbUserMapper.swift in Sources */,
 				D5F6C8F02CA0928F002A0410 /* TripDetailViewModel.swift in Sources */,
+				F9D751252CA82F8100F3A1D4 /* SwipingCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

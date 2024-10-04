@@ -93,7 +93,7 @@ struct TripDetailView: View {
                         Button("Delete", role: .destructive) {
                             Task {
                                 do {
-                                    try await viewModel.deleteTrip(tripId: viewModel.trip.id!)
+                                    try await viewModel.deleteTrip(tripId: viewModel.trip.id)
                                     if shouldNavigateBack {
                                         presentationMode.wrappedValue.dismiss() // Dismiss the view
                                     }

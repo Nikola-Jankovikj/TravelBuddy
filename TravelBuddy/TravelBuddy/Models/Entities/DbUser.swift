@@ -17,8 +17,8 @@ struct DbUser: Identifiable, Codable {
     var numberCompletedTrips: Int = 0
     var numberPhotosTaken: Int = 0
     var favoriteActivity: String
-    var likedUserIds: [String] = []
-    var rejectedUserIds: [String] = []
+    var likedTripIds: [String] = []
+    var rejectedTripIds: [String] = []
     var dateCreated: Date
     var dateUpdated: Date
 }

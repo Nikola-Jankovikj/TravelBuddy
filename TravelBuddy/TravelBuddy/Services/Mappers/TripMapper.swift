@@ -13,7 +13,7 @@ final class TripMapper {
     private init() { }
     
     func mapSnapshotToTrip(dict: [String: Any]) throws -> Trip {
-        let id = dict["id"] as? String
+        let id = dict["id"] as? String ?? UUID().uuidString
         let destinationDict = dict["destination"] as? [String: Any]
         let startDate = (dict["startDate"] as? Timestamp)?.dateValue() ?? Date()
         let endDate = (dict["endDate"] as? Timestamp)?.dateValue() ?? Date()
@@ -24,7 +24,6 @@ final class TripMapper {
         let videos = dict["videos"] as? [String] ?? []
         let status = TripStatus(rawValue: dict["status"] as? String ?? "") ?? .planned
         
-        // Parse the destination dictionary to create a Location object
         let destination = Location(
             city: destinationDict?["city"] as? String ?? "",
             country: destinationDict?["country"] as? String ?? ""

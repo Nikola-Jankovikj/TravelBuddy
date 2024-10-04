@@ -11,7 +11,7 @@ struct MainAppView: View {
     @Binding var showSignInView: Bool
     @State var showAlert: Bool = false
     @Binding var imageData: [Data]
-    var user: DbUser
+    @Binding var user: DbUser?
     
     var body: some View {
         TabView {
@@ -22,12 +22,12 @@ struct MainAppView: View {
                     Text("My Trips")
                 }
             
-            SwipingView()
+            SwipingView(user: $user)
                 .tabItem {
                     Image(systemName: "globe")
                 }
             
-            ProfileView(user: user, showSignInView: $showSignInView, imageData: $imageData)
+            ProfileView(user: user!, showSignInView: $showSignInView, imageData: $imageData)
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")

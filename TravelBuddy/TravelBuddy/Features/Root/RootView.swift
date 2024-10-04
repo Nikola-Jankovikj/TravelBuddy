@@ -28,7 +28,7 @@ struct RootView: View {
                 
                 if viewModel.isDataFetched {
                     NavigationStack {
-                        MainAppView(showSignInView: $viewModel.showSignInView, imageData: $viewModel.imageData, user: viewModel.retreiveUser())
+                        MainAppView(showSignInView: $viewModel.showSignInView, imageData: $viewModel.imageData, user: $viewModel.user)
                     }
                 }
             }

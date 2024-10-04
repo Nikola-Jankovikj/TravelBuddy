@@ -10,6 +10,7 @@ import SwiftUI
 struct SwipingFilterView: View {
     @StateObject var viewModel: SwipingViewModel
     @Binding var showSwipingFilterView: Bool
+    @Binding var user: DbUser?
     
     var body: some View {
         VStack {
@@ -53,7 +54,7 @@ struct SwipingFilterView: View {
             
             Button("Submit") {
                 print("\(viewModel.selectedActivities)")
-                viewModel.getTripsWithFilter()
+                viewModel.getTripsWithFilter(loggedInUser: user!)
                 showSwipingFilterView.toggle()
             }
             

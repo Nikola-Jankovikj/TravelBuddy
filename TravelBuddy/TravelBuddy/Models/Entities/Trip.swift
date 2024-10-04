@@ -8,8 +8,8 @@
 import Foundation
 import FirebaseCore
 
-struct Trip: Identifiable, Codable {
-    var id: String?
+struct Trip: Identifiable, Codable{
+    var id: String
     var destination: Location
     var startDate: Date
     var endDate: Date
@@ -22,7 +22,7 @@ struct Trip: Identifiable, Codable {
     
     func toDictionary() -> [String: Any] {
             return [
-                "id": id ?? UUID().uuidString,
+                "id": id,
                 "destination": [
                     "city": destination.city,
                     "country": destination.country

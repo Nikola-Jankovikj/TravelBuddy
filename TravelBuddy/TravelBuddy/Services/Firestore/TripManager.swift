@@ -131,7 +131,7 @@ final class TripManager {
     
     // Update trip information in Firestore
     func updateTrip(trip: Trip) throws {
-        guard let tripId = trip.id else { return }
+        let tripId = trip.id
         try tripDocument(tripId: tripId).setData(from: trip)
     }
     
@@ -192,7 +192,7 @@ final class TripManager {
        func completeTrip(trip: Trip) async throws {
            var updatedTrip = trip
            updatedTrip.status = .completed
-           try tripCollection.document(trip.id!).setData(from: updatedTrip)
+           try tripCollection.document(trip.id).setData(from: updatedTrip)
        }
     
     func deleteTrip(tripId: String) async throws {

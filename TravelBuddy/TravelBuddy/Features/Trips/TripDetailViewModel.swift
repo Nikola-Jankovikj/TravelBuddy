@@ -21,7 +21,7 @@ class TripDetailViewModel: ObservableObject {
     }
 
     func refreshTrip() {
-        guard let tripId = trip.id else { return }
+        let tripId = trip.id
         
         isLoading = true
         Task {
@@ -36,7 +36,7 @@ class TripDetailViewModel: ObservableObject {
     }
     
     func updateTripStatus(_ status: TripStatus) {
-        guard let tripId = trip.id else { return }
+        let tripId = trip.id
         
         isLoading = true
         Task {

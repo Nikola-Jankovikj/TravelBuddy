@@ -45,4 +45,15 @@ final class UserManager {
         try userDocument(userId: userId).setData(from: user)
     }
     
+    func updateLikedTripIds(userId: String, tripId: String) async throws {
+        guard var user = try? await getUser(userId: userId) else { return }
+        user.likedTripIds.append(tripId)
+        try userDocument(userId: userId).setData(from: user)
+    }
+    
+    func updateRejectedTripIds(userId: String, tripId: String) async throws {
+        guard var user = try? await getUser(userId: userId) else { return }
+        user.rejectedTripIds.append(tripId)
+        try userDocument(userId: userId).setData(from: user)
+    }
 }

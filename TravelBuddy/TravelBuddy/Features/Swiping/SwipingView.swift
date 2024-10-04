@@ -9,15 +9,11 @@ import SwiftUI
 
 struct SwipingView: View {
     @StateObject private var viewModel = SwipingViewModel()
-    
     @State var showSwipingFilterView: Bool = false
-    
+    @Binding var user: DbUser?
     
     var body: some View {
         VStack {
-//            ScrollView {
-////                ForEach
-//            }
             
             NavigationStack {
                 Button("Show filters") {
@@ -26,16 +22,42 @@ struct SwipingView: View {
                 }
             }
             .navigationDestination(isPresented: $showSwipingFilterView) {
-                SwipingFilterView(viewModel: viewModel, showSwipingFilterView: $showSwipingFilterView)
+                SwipingFilterView(viewModel: viewModel, showSwipingFilterView: $showSwipingFilterView, user: $user)
             }
             
-            ForEach(viewModel.trips){trip in
-                    
+            Text("num Trips: \(viewModel.trips.count)")
+
+            if viewModel.showingTrip != nil {
+                
+                SwipingCardView(photos: $viewModel.photos, trip: $viewModel.showingTrip, loggedInUser: $user, tripUser: viewModel.tripUser, addToLikedTrips: viewModel.addToLikedTrips, addToRejectedTrips: viewModel.addToDislikedTrips)
+                    .onAppear() {
+                        Task {
+                            await viewModel.fetchPhotosFromUser(userId: viewModel.showingTrip!.createdByUserID)
+                            do {
+                                try await viewModel.getUserFromTrip(trip: viewModel.showingTrip!)
+                            } catch {
+                                print("cannot get user")
+                            }
+                        }
+                    }
+                    .onChange(of: viewModel.showingTrip!.id) { newValue in
+                        Task {
+                            await viewModel.fetchPhotosFromUser(userId: viewModel.showingTrip!.createdByUserID)
+                            do {
+                                try await viewModel.getUserFromTrip(trip: viewModel.showingTrip!)
+                            } catch {
+                                print("cannot get user")
+                            }
+                        }
+                    }
+                
+            } else {
+                Text("No trips to show.")
             }
         }
     }
 }
 
-#Preview {
-    SwipingView()
-}
+//#Preview {
+//    SwipingView()
+//}

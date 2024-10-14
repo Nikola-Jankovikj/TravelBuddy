@@ -139,6 +139,7 @@ struct TripDetailView: View {
         activities: mockActivities,
         createdByUserID: "mockUserID",
         participantIDs: ["user1", "user2"],
+        requestedUsersIds: ["user3", "user4"],
         photos: [],
         videos: [],
         status: .planned

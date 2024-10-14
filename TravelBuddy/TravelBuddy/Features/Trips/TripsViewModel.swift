@@ -15,7 +15,28 @@ class TripsViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var showTripCreation = false
     @Published var errorMessage: String?
+    @Published var loggedInUser: DbUser?
+    @Published var requestedUsers: [DbUser] = []
 
+    var isUserTripOwner: Bool {
+            guard let loggedInUser = Auth.auth().currentUser, let activeTrip = activeTrip else { return false }
+        return activeTrip.createdByUserID == loggedInUser.uid
+        }
+    
+    func fetchRequestedUsers() async throws -> [DbUser] {
+        guard let requestedUsersIds = activeTrip?.requestedUsersIds else {
+            return []
+        }
+
+        var users: [DbUser] = []
+        for userId in requestedUsersIds {
+            let user = try await UserManager.shared.getUser(userId: userId)
+            users.append(user)
+        }
+
+        return users
+    }
+    
     private let tripManager = TripManager.shared
     private var activeTripListener: ListenerRegistration?
     private var completedTripsListener: ListenerRegistration?
@@ -62,6 +83,19 @@ class TripsViewModel: ObservableObject {
     func createNewTrip(_ trip: Trip) {
         activeTrip = trip
         showTripCreation = false
+    }
+    
+    func acceptRequest(from user: DbUser, for trip: Trip) async throws {
+        var updatedTrip = trip
+        updatedTrip.participantIDs.append(user.id)
+        updatedTrip.requestedUsersIds.removeAll { $0 == user.id }
+        try TripManager.shared.updateTrip(trip: updatedTrip)
+    }
+
+    func rejectRequest(from user: DbUser, for trip: Trip) async throws {
+        var updatedTrip = trip
+        updatedTrip.requestedUsersIds.removeAll { $0 == user.id }
+        try TripManager.shared.updateTrip(trip: updatedTrip)
     }
 
     deinit {

@@ -64,7 +64,7 @@ struct SwipingCardView: View {
                                     if let loggedInUser = loggedInUser {
                                         var updatedTrip = trip
                                         updatedTrip.requestedUsersIds.append(loggedInUser.id)
-                                        //try await addToLikedTrips(updatedTrip)
+                                        try await addToLikedTrips(updatedTrip)
                                         try TripManager.shared.updateTrip(trip: updatedTrip)
                                     }
                                 } catch {

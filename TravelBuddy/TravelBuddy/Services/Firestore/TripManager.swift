@@ -168,6 +168,24 @@ final class TripManager {
                    completion(activeTrip)
                }
        }
+    
+    func listenToParticipatedTrips(userId: String, completion: @escaping ([Trip]) -> Void) -> ListenerRegistration? {
+        return tripCollection
+            .whereField("participantIDs", arrayContains: userId)
+            .addSnapshotListener { snapshot, error in
+                guard let documents = snapshot?.documents, error == nil else {
+                    completion([])
+                    return
+                }
+                
+                let trips = documents.compactMap { doc -> Trip? in
+                    return try? doc.data(as: Trip.self)
+                }
+                
+                completion(trips)
+            }
+    }
+
 
        // Real-time listener for the completed trips
        func listenToCompletedTrips(userId: String, completion: @escaping ([Trip]) -> Void) -> ListenerRegistration? {

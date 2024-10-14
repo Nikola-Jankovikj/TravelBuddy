@@ -26,6 +26,33 @@ struct TripsView: View {
                 
                 // Content based on selected tab
                 if selectedTab == .active {
+                    if !viewModel.participatedTrips.isEmpty {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Planned Trips")
+                                .font(.headline)
+                                .padding(.horizontal)
+                            
+                            ForEach(viewModel.participatedTrips) { trip in
+                                NavigationLink(destination: TripDetailView(trip: trip, shouldNavigateBack: .constant(false))) {
+                                    HStack {
+                                        Text("\(trip.destination.city), \(trip.destination.country)")
+                                            .font(.subheadline)
+                                        Spacer()
+                                        Text("\(trip.status.rawValue)")
+                                            .foregroundColor(.gray)
+                                            .font(.caption)
+                                    }
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(8)
+                                    .shadow(radius: 2)
+                                    .padding(.horizontal)
+                                }
+                            }
+                        }
+                        .padding(.top, 20)
+                    }
+
                     if viewModel.isLoading {
                         ProgressView()
                             .scaleEffect(1.5)
@@ -82,7 +109,7 @@ struct TripsView: View {
                         .padding(.top, 20)
                     } else {
                         VStack(spacing: 20) {
-                            Text("No active trip")
+                            Text("No created trip")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.secondary)

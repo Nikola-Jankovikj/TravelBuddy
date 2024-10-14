@@ -11,12 +11,18 @@ import FirebaseFirestore
 
 class TripsViewModel: ObservableObject {
     @Published var activeTrip: Trip?
+    @Published var participatedTrips: [Trip] = []
     @Published var completedTrips: [Trip] = []
     @Published var isLoading = false
     @Published var showTripCreation = false
     @Published var errorMessage: String?
     @Published var loggedInUser: DbUser?
     @Published var requestedUsers: [DbUser] = []
+    
+    private let tripManager = TripManager.shared
+    private var activeTripListener: ListenerRegistration?
+    private var completedTripsListener: ListenerRegistration?
+    private var participatedTripsListener: ListenerRegistration?
 
     var isUserTripOwner: Bool {
             guard let loggedInUser = Auth.auth().currentUser, let activeTrip = activeTrip else { return false }
@@ -37,10 +43,6 @@ class TripsViewModel: ObservableObject {
         return users
     }
     
-    private let tripManager = TripManager.shared
-    private var activeTripListener: ListenerRegistration?
-    private var completedTripsListener: ListenerRegistration?
-    
     func startListeningToTrips() {
         guard let userId = Auth.auth().currentUser?.uid else {
             errorMessage = "Unable to get user ID."
@@ -53,6 +55,13 @@ class TripsViewModel: ObservableObject {
                 self?.activeTrip = activeTrip
             }
         }
+        
+        participatedTripsListener = TripManager.shared.listenToParticipatedTrips(userId: userId) { [weak self] trips in
+                   DispatchQueue.main.async {
+                       self?.participatedTrips = trips
+                       self?.isLoading = false
+                   }
+               }
 
         // Listen for completed trips updates in real time
         completedTripsListener = tripManager.listenToCompletedTrips(userId: userId) { [weak self] completedTrips in
@@ -66,6 +75,7 @@ class TripsViewModel: ObservableObject {
     func stopListeningToTrips() {
         activeTripListener?.remove()
         completedTripsListener?.remove()
+        participatedTripsListener?.remove()
     }
 
     func completeTrip(trip: Trip) {

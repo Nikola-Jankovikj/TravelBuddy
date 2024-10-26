@@ -20,8 +20,17 @@ class SwipingViewModel: ObservableObject {
     @Published var tripUser: DbUser? = nil
     @Published var showingTrip: Trip? = nil
     
-    func getTripsWithFilter(loggedInUser: DbUser) {
-        if location.description == "" {
+    init() {
+        Task {
+            trips = try await TripManager.shared.getAllTrips()
+            showingTrip = trips.first
+        }
+    }
+    
+    func getTripsWithFilter(loggedInUser: DbUser) async throws {
+        if location.description == ", " {
+//            self.trips = try await TripManager.shared.getAllTrips()
+//            self.showingTrip = self.trips.first
             return
         }
         
@@ -62,7 +71,7 @@ class SwipingViewModel: ObservableObject {
                 print("No trips found.")
             }
         }
-        }
+    }
 //    }
     
     func getUserFromTrip(trip: Trip) async throws {

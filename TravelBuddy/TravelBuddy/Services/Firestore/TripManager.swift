@@ -33,6 +33,14 @@ final class TripManager {
         return try TripMapper.shared.mapSnapshotToTrip(dict: data)
     }
     
+    func getAllTrips() async throws -> [Trip] {
+        let snapshot = try await tripCollection.getDocuments()
+        return snapshot.documents.compactMap { document in
+            try? TripMapper.shared.mapSnapshotToTrip(dict: document.data())
+        }
+    }
+
+    
     func convertStringsToActivities(tripActivityStrings: [String]) -> [Activity] {
         return tripActivityStrings.compactMap { activityString in
             return Activity.allCases.first { $0.rawValue == activityString }

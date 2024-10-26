@@ -53,9 +53,11 @@ struct SwipingFilterView: View {
             .padding(.horizontal)
             
             Button("Submit") {
-                print("\(viewModel.selectedActivities)")
-                viewModel.getTripsWithFilter(loggedInUser: user!)
-                showSwipingFilterView.toggle()
+                Task {
+                    print("\(viewModel.selectedActivities)")
+                    try await viewModel.getTripsWithFilter(loggedInUser: user!)
+                    showSwipingFilterView.toggle()
+                }
             }
             
         }

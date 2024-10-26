@@ -14,7 +14,6 @@ struct SwipingView: View {
     
     var body: some View {
         VStack {
-            
             NavigationStack {
                 Button("Show filters") {
                     print("id: \(viewModel.id)")

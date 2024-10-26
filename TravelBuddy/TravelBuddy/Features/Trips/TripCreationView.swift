@@ -17,18 +17,20 @@ struct TripCreationView: View {
 
     var body: some View {
         VStack {
-            Text("Create New Trip")
-                .font(.largeTitle)
-                .padding(.bottom, 20)
-
-            // City and Country Fields
-            TextField("City", text: $viewModel.city)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
-            TextField("Country", text: $viewModel.country)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+            NavigationStack {
+                if viewModel.location.description == ", " {
+                    Button("Choose location") {
+                        viewModel.showCitySearchView = true
+                    }
+                } else {
+                    Button("\(viewModel.location)") {
+                        viewModel.showCitySearchView = true
+                    }
+                }
+            }
+            .navigationDestination(isPresented: $viewModel.showCitySearchView) {
+                CitySearchView(showCitySearchView: $viewModel.showCitySearchView, location: $viewModel.location)
+            }
 
             // DatePickers for From and To Dates
             DatePicker("Date From", selection: $viewModel.dateFrom, in: Date()..., displayedComponents: .date)

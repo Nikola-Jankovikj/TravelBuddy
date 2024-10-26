@@ -1,10 +1,3 @@
-//
-//  SwipingCardView.swift
-//  TravelBuddy
-//
-//  Created by Nikola Jankovikj on 28.9.24.
-//
-
 import SwiftUI
 
 struct SwipingCardView: View {
@@ -17,9 +10,6 @@ struct SwipingCardView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            
-            Text("\(trip?.id ?? "lele") & \(photos.count)")
-            
             ZStack {
                 ImageSliderView(imageData: $photos, width: geometry.size.width)
 
@@ -51,11 +41,11 @@ struct SwipingCardView: View {
                     HStack {
                         Button("Reject") {
                             Task {
+                                guard let trip = trip else { return }
                                 do {
-                                    self.loggedInUser!.likedTripIds.append(trip!.id)
-                                    try await addToRejectedTrips(trip!)
+                                    try await addToRejectedTrips(trip)
                                 } catch {
-                                    print("ne uspeav da reject-nam")
+                                    print("Failed to dislike.")
                                 }
                             }
                         }
@@ -69,11 +59,16 @@ struct SwipingCardView: View {
                         
                         Button("Like") {
                             Task {
+                                guard let trip = trip else { return }
                                 do {
-                                    self.loggedInUser!.rejectedTripIds.append(trip!.id)
-                                    try await addToLikedTrips(trip!)
+                                    if let loggedInUser = loggedInUser {
+                                        var updatedTrip = trip
+                                        updatedTrip.requestedUsersIds.append(loggedInUser.id)
+                                        try await addToLikedTrips(updatedTrip)
+                                        try TripManager.shared.updateTrip(trip: updatedTrip)
+                                    }
                                 } catch {
-                                    print("ne uspeav da like-nam")
+                                    print("Failed to like")
                                 }
                             }
                         }
@@ -89,8 +84,3 @@ struct SwipingCardView: View {
         }
     }
 }
-
-
-//#Preview {
-//    SwipingCardView()
-//}

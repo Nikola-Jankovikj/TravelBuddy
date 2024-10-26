@@ -20,6 +20,7 @@ final class TripMapper {
         let activities = (dict["activities"] as? [String])?.compactMap { Activity(rawValue: $0) } ?? []
         let createdByUserID = dict["createdByUserID"] as? String ?? ""
         let participantIDs = dict["participantIDs"] as? [String] ?? []
+        let requestedUsersIds = dict["requestedUsersIds"] as? [String] ?? []
         let photos = dict["photos"] as? [String] ?? []
         let videos = dict["videos"] as? [String] ?? []
         let status = TripStatus(rawValue: dict["status"] as? String ?? "") ?? .planned
@@ -37,6 +38,7 @@ final class TripMapper {
             activities: activities,
             createdByUserID: createdByUserID,
             participantIDs: participantIDs,
+            requestedUsersIds: requestedUsersIds,
             photos: photos,
             videos: videos,
             status: status

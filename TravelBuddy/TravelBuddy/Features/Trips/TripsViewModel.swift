@@ -11,14 +11,37 @@ import FirebaseFirestore
 
 class TripsViewModel: ObservableObject {
     @Published var activeTrip: Trip?
+    @Published var participatedTrips: [Trip] = []
     @Published var completedTrips: [Trip] = []
     @Published var isLoading = false
     @Published var showTripCreation = false
     @Published var errorMessage: String?
-
+    @Published var loggedInUser: DbUser?
+    @Published var requestedUsers: [DbUser] = []
+    
     private let tripManager = TripManager.shared
     private var activeTripListener: ListenerRegistration?
     private var completedTripsListener: ListenerRegistration?
+    private var participatedTripsListener: ListenerRegistration?
+
+    var isUserTripOwner: Bool {
+            guard let loggedInUser = Auth.auth().currentUser, let activeTrip = activeTrip else { return false }
+        return activeTrip.createdByUserID == loggedInUser.uid
+        }
+    
+    func fetchRequestedUsers() async throws -> [DbUser] {
+        guard let requestedUsersIds = activeTrip?.requestedUsersIds else {
+            return []
+        }
+
+        var users: [DbUser] = []
+        for userId in requestedUsersIds {
+            let user = try await UserManager.shared.getUser(userId: userId)
+            users.append(user)
+        }
+
+        return users
+    }
     
     func startListeningToTrips() {
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -32,6 +55,13 @@ class TripsViewModel: ObservableObject {
                 self?.activeTrip = activeTrip
             }
         }
+        
+        participatedTripsListener = TripManager.shared.listenToParticipatedTrips(userId: userId) { [weak self] trips in
+                   DispatchQueue.main.async {
+                       self?.participatedTrips = trips
+                       self?.isLoading = false
+                   }
+               }
 
         // Listen for completed trips updates in real time
         completedTripsListener = tripManager.listenToCompletedTrips(userId: userId) { [weak self] completedTrips in
@@ -45,6 +75,7 @@ class TripsViewModel: ObservableObject {
     func stopListeningToTrips() {
         activeTripListener?.remove()
         completedTripsListener?.remove()
+        participatedTripsListener?.remove()
     }
 
     func completeTrip(trip: Trip) {
@@ -62,6 +93,19 @@ class TripsViewModel: ObservableObject {
     func createNewTrip(_ trip: Trip) {
         activeTrip = trip
         showTripCreation = false
+    }
+    
+    func acceptRequest(from user: DbUser, for trip: Trip) async throws {
+        var updatedTrip = trip
+        updatedTrip.participantIDs.append(user.id)
+        updatedTrip.requestedUsersIds.removeAll { $0 == user.id }
+        try TripManager.shared.updateTrip(trip: updatedTrip)
+    }
+
+    func rejectRequest(from user: DbUser, for trip: Trip) async throws {
+        var updatedTrip = trip
+        updatedTrip.requestedUsersIds.removeAll { $0 == user.id }
+        try TripManager.shared.updateTrip(trip: updatedTrip)
     }
 
     deinit {

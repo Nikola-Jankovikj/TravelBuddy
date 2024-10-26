@@ -1,16 +1,10 @@
-//
-//  TripsView.swift
-//  TravelBuddy
-//
-//  Created by Todor Jovanovski on 22.9.24.
-//
-
-
 import SwiftUI
 
 struct TripsView: View {
     @StateObject private var viewModel = TripsViewModel()
     @State private var selectedTab: Tab = .active
+    @State private var requestedUsers: [DbUser] = [] // State property for requested users
+
 
     enum Tab {
         case active, completed
@@ -32,6 +26,33 @@ struct TripsView: View {
                 
                 // Content based on selected tab
                 if selectedTab == .active {
+                    if !viewModel.participatedTrips.isEmpty {
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text("Planned Trips")
+                                .font(.headline)
+                                .padding(.horizontal)
+                            
+                            ForEach(viewModel.participatedTrips) { trip in
+                                NavigationLink(destination: TripDetailView(trip: trip, shouldNavigateBack: .constant(false))) {
+                                    HStack {
+                                        Text("\(trip.destination.city), \(trip.destination.country)")
+                                            .font(.subheadline)
+                                        Spacer()
+                                        Text("\(trip.status.rawValue)")
+                                            .foregroundColor(.gray)
+                                            .font(.caption)
+                                    }
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(8)
+                                    .shadow(radius: 2)
+                                    .padding(.horizontal)
+                                }
+                            }
+                        }
+                        .padding(.top, 20)
+                    }
+
                     if viewModel.isLoading {
                         ProgressView()
                             .scaleEffect(1.5)
@@ -40,6 +61,37 @@ struct TripsView: View {
                         VStack(spacing: 20) {
                             TripDetailView(trip: activeTrip, shouldNavigateBack: .constant(false))
                             
+                            if viewModel.isUserTripOwner {
+                                Text("Trip Requests")
+                                    .font(.headline)
+                                    .padding(.top)
+
+                                ForEach(requestedUsers) { user in
+                                    HStack {
+                                        Text(user.name)
+                                        Spacer()
+                                        Button("Accept") {
+                                            Task {
+                                                try await viewModel.acceptRequest(from: user, for: activeTrip)
+                                            }
+                                        }
+                                        .buttonStyle(.borderedProminent)
+
+                                        Button("Reject") {
+                                            Task {
+                                                try await viewModel.rejectRequest(from: user, for: activeTrip)
+                                            }
+                                        }
+                                        .buttonStyle(.bordered)
+                                    }
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(8)
+                                    .shadow(radius: 3)
+                                    .padding(.horizontal)
+                                }
+                            }
+
                             Button(action: {
                                 viewModel.completeTrip(trip: activeTrip)
                             }) {
@@ -57,7 +109,7 @@ struct TripsView: View {
                         .padding(.top, 20)
                     } else {
                         VStack(spacing: 20) {
-                            Text("No active trip")
+                            Text("No created trip")
                                 .font(.title3)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.secondary)
@@ -87,7 +139,7 @@ struct TripsView: View {
                     CompletedTripsView()
                 }
 
-                Spacer() // Push content to the top
+                Spacer()
             }
             .padding(10)
             .background(LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemGray6)]), startPoint: .top, endPoint: .bottom)
@@ -95,13 +147,17 @@ struct TripsView: View {
         }
         .onAppear {
             viewModel.startListeningToTrips()
+            Task {
+                do {
+                    requestedUsers = try await viewModel.fetchRequestedUsers() // Fetch requested users
+                } catch {
+                    // Handle error, if necessary
+                    print("Error fetching requested users: \(error)")
+                }
+            }
         }
         .onDisappear {
             viewModel.stopListeningToTrips()
         }
     }
-}
-
-#Preview {
-    TripsView()
 }

@@ -54,6 +54,7 @@ final class TripCreationViewModel: ObservableObject {
             activities: Array(selectedActivities),
             createdByUserID: userId,
             participantIDs: [],
+            requestedUsersIds: [],
             photos: [],
             videos: [],
             status: .planned

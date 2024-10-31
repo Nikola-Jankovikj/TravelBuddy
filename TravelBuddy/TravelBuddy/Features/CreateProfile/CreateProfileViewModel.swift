@@ -17,7 +17,7 @@ final class CreateProfileViewModel : ObservableObject {
     @Published var age = 18
     @Published var city = ""
     @Published var country = ""
-    @Published var favoriteActivity = ""
+    @Published var favoriteActivity : Activity = .sightseeing
     @Published var description = ""
     @Published var location = Location(city: "", country: "")
     
@@ -42,7 +42,7 @@ final class CreateProfileViewModel : ObservableObject {
             age: age,
             location: location,
             description: description,
-            favoriteActivity: favoriteActivity,
+            favoriteActivity: favoriteActivity.rawValue,
             dateCreated: Date(),
             dateUpdated: Date()
         )

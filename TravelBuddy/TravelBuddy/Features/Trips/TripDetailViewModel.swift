@@ -53,4 +53,16 @@ class TripDetailViewModel: ObservableObject {
     func deleteTrip(tripId: String) async throws {
         try await tripManager.deleteTrip(tripId: tripId)
     }
+    
+    func completeTrip(trip: Trip) {
+        Task {
+            do {
+                try await tripManager.completeTrip(trip: trip)
+            } catch {
+                DispatchQueue.main.async {
+                    self.errorMessage = ErrorMessage(message: "Failed to complete trip: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }

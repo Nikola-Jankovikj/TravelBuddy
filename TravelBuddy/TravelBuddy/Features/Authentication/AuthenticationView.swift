@@ -1,59 +1,122 @@
-//
-//  AuthenticationView.swift
-//  TravelBuddy
-//
-//  Created by Nikola Jankovikj on 12.9.24.
-//
-
 import SwiftUI
 import GoogleSignIn
 import GoogleSignInSwift
 
 struct AuthenticationView: View {
-    
     @StateObject private var viewModel = AuthenticationViewModel()
     @Binding var showSignInView: Bool
-    
+
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
+            Spacer()
+
+            VStack(spacing: 8) {
+                Image(systemName: "globe")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .foregroundColor(.blue)
+                
+                Text("Welcome to TravelBuddy")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.primary)
+            }
             
+            Spacer()
+            
+            NavigationLink {
+                    LogInWithEmailView(showSignInView: $showSignInView)
+                } label: {
+                    Text("Log In")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(height: 55)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .cornerRadius(5 )
+                        .shadow(radius: 5)
+                }
+
+            // Sign Up with Email Button
             NavigationLink {
                 SignUpEmailView(showSignInView: $showSignInView)
             } label: {
-                Text("Sign Up With Email")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(height: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.blue)
-                    .cornerRadius(10)
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(Color.white)
+                            .frame(width: 38, height: 40)
+                        
+                        Image(systemName: "envelope.fill")
+                            .foregroundColor(.blue)
+                            .font(.system(size: 14))
+                    }
+                    
+                    Text("Sign up with Email")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                }
+                .padding(.leading, 1)
+                .frame(height: 43)
+                .frame(maxWidth: .infinity)
+                .background(Color.blue)
+                .cornerRadius(3)
+                .shadow(radius: 3, x: 2, y: 2)
             }
-            
+
+
+            // Google Sign In Button
             GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
                 Task {
                     do {
                         try await viewModel.signInGoogle()
                         showSignInView = false
                     } catch {
-                        print("error \(error)")
+                        print("Error signing in with Google: \(error)")
                     }
                 }
             }
             
-            NavigationLink {
-                LogInWithEmailView(showSignInView: $showSignInView)
-            } label: {
-                Text("Log in")
+            Spacer()
+
+            // Footer with Terms and Conditions
+            VStack(spacing: 4) {
+                Text("By continuing, you agree to our")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                
+                HStack(spacing: 4) {
+                    Text("Terms of Service")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                    Text("and")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                    Text("Privacy Policy")
+                        .font(.footnote)
+                        .foregroundColor(.blue)
+                }
             }
-            
         }
         .padding()
+        .background(
+            LinearGradient(
+                gradient: Gradient(colors: [Color(.systemBackground), Color(.systemGray6)]),
+                startPoint: .top, endPoint: .bottom
+            )
+            .edgesIgnoringSafeArea(.all)
+        )
         .navigationTitle("Sign In")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
-//#Preview {
-//    NavigationStack {
-//        AuthenticationView(showSignInView: .constant(false))
-//    }
-//}
+#Preview {
+    NavigationStack {
+        AuthenticationView(showSignInView: .constant(false))
+    }
+}

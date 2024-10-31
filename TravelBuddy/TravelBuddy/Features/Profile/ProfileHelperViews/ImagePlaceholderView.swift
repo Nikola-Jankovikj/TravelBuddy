@@ -9,8 +9,9 @@ import SwiftUI
 
 struct PlaceholderView: View {
     var body: some View {
-        Text("Select photos")
-            .font(.largeTitle)
-            .foregroundColor(.black)
+        Text("Add photos")
+            .font(.headline)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
     }
 }

@@ -11,6 +11,7 @@ import Foundation
 class TripDetailViewModel: ObservableObject {
     @Published var trip: Trip
     @Published var isLoading = false
+    @Published var loggedInUserId: String = ""
     @Published var errorMessage: ErrorMessage?
     
 
@@ -18,6 +19,12 @@ class TripDetailViewModel: ObservableObject {
 
     init(trip: Trip) {
         self.trip = trip
+        do {
+           self.loggedInUserId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+        }
+        catch{
+            print("Error fetching authenticated user: \(error.localizedDescription)")
+        }
     }
 
     func refreshTrip() {
@@ -33,6 +40,17 @@ class TripDetailViewModel: ObservableObject {
             }
             isLoading = false
         }
+    }
+    
+    func fetchParticipants() async throws -> [DbUser] {
+        let participantIDs = trip.participantIDs
+        var participants: [DbUser] = []
+        for userId in participantIDs {
+            let user = try await UserManager.shared.getUser(userId: userId)
+            participants.append(user)
+        }
+        
+        return participants
     }
     
     func updateTripStatus(_ status: TripStatus) {

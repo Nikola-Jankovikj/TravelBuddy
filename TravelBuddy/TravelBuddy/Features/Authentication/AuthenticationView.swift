@@ -10,18 +10,10 @@ struct AuthenticationView: View {
         VStack(spacing: 10) {
             Spacer()
 
-            VStack(spacing: 8) {
-                Image(systemName: "globe")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 80, height: 80)
-                    .foregroundColor(.blue)
-                
-                Text("Welcome to TravelBuddy")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.primary)
-            }
+            Image("TravelBuddy")
+                .resizable()
+                .scaledToFit()
+                .padding()
             
             Spacer()
             
@@ -105,8 +97,9 @@ struct AuthenticationView: View {
         .padding()
         .background(
             LinearGradient(
-                gradient: Gradient(colors: [Color(.systemBackground), Color(.systemGray6)]),
-                startPoint: .top, endPoint: .bottom
+                gradient: Gradient(colors: [Color(red: 173/255, green: 216/255, blue: 230/255), Color(red: 135/255, green: 206/255, blue: 250/255)]), // Soft 
+                startPoint: .top,
+                endPoint: .bottom
             )
             .edgesIgnoringSafeArea(.all)
         )

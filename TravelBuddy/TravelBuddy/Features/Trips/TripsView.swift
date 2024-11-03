@@ -11,7 +11,7 @@ struct TripsView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 16) {
+            VStack(spacing: 10) {
                 Picker("Trip Sections", selection: $selectedTab) {
                     Text("Active Trip").tag(Tab.active)
                     Text("Completed Trips").tag(Tab.completed)
@@ -23,12 +23,12 @@ struct TripsView: View {
                 Group {
                     if selectedTab == .active {
                         ActiveAndParticipatedTripsSection
+                            .padding(.top)
                         
                     } else {
                         CompletedTripsView()
                     }
                 }
-                .padding(.top)
                 
                 Spacer()
             }
@@ -58,57 +58,68 @@ struct TripsView: View {
             ProgressView()
                 .scaleEffect(1.5)
                 .padding(.top, 50)
-        } else if let activeTrip = viewModel.activeTrip {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 16) {
-                    // Active Trip
-                    if let activeTrip = viewModel.activeTrip {
-                        TripDetailView(trip: activeTrip, shouldNavigateBack: .constant(false))
-                            .frame(width: UIScreen.main.bounds.width * 0.85)
-                    }
-                    
-                    // Participated Trips
-                    ForEach(viewModel.participatedTrips, id: \.id) { trip in
-                        TripDetailView(trip: trip, shouldNavigateBack: .constant(false))
-                            .frame(width: UIScreen.main.bounds.width * 0.85)
-                    }
-                }
-                .padding(.horizontal)
-            }
-            .padding(.top)
-            
-            if viewModel.isUserTripOwner {
-                Text("Trip Requests")
-                    .font(.headline)
-                    .padding(.top)
-                
+        } else if viewModel.activeTrip != nil || viewModel.participatedTrips != [] {
+            ScrollView(.vertical){
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        ForEach(requestedUsers) { user in
-                            UserRequestCard(user: user, trip: activeTrip, viewModel: viewModel)
+                    HStack(spacing: 16) {
+                        // Active Trip
+//                        if let activeTrip = viewModel.activeTrip {
+//                            TripDetailView(trip: activeTrip, shouldNavigateBack: .constant(false))
+//                                .frame(width: UIScreen.main.bounds.width * 0.85)
+//                        }
+//                        
+                        // Participated Trips
+                        ForEach(viewModel.participatedTrips, id: \.id) { trip in
+                            TripDetailView(trip: trip, shouldNavigateBack: 
+                                .constant(false))
+                                .frame(width: UIScreen.main.bounds.width * 0.85)
                         }
                     }
                     .padding(.horizontal)
                 }
+                
+                if viewModel.isUserTripOwner {
+                    if let activeTrip = viewModel.activeTrip{
+                        VStack{
+                            Text("Requests for your trip (\(viewModel.requestedUsers.count))")
+                                .font(.headline)
+                                .padding(.top)
+                                .frame(alignment: .topLeading)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 12) {
+                                    ForEach(viewModel.requestedUsers) { user in
+                                        UserRequestCard(user: user, trip: activeTrip, viewModel: viewModel)
+                                    }
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                        .background(Color(.systemGray6))
+                        .frame(maxWidth: .infinity)
+                        .cornerRadius(16)
+                    }
+                    }
+                    
             }
-        } else {
+        }
+        if viewModel.activeTrip == nil {
             NoActiveTripView
         }
     }
     
     private var NoActiveTripView: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "exclamationmark.circle")
-                .resizable()
-                .scaledToFit()
-                .frame(height: 80)
-                .foregroundColor(.gray)
+        VStack() {
             
-            Text("No created trip")
-                .font(.title3)
-                .fontWeight(.semibold)
-                .foregroundColor(.secondary)
-            
+            if viewModel.participatedTrips.count == 0 {
+                Spacer()
+                Image("no-trips")
+                    .resizable()
+                    .scaledToFit()
+                    .opacity(0.8)
+                Spacer()
+            }
+          
             CreateTripButton
         }
     }
@@ -117,7 +128,7 @@ struct TripsView: View {
         Button(action: {
             viewModel.showTripCreation = true
         }) {
-            Label("Create New Trip", systemImage: "plus.circle.fill")
+            Label("Create Your Trip", systemImage: "plus.circle.fill")
                 .font(.headline)
                 .frame(maxWidth: .infinity)
                 .padding()

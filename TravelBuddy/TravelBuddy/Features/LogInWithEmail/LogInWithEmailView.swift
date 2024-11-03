@@ -69,9 +69,10 @@ struct LogInWithEmailView: View {
             .padding(.top, 20)
         }
         .padding()
-        .navigationTitle("Log In")
+        .navigationTitle("Log In")        
     }
 }
+
 
 #Preview {
     LogInWithEmailView(showSignInView: .constant(true))

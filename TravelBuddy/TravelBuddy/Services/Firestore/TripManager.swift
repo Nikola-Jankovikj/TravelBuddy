@@ -188,30 +188,31 @@ final class TripManager {
 
 
        // Real-time listener for the completed trips
-       func listenToCompletedTrips(userId: String, completion: @escaping ([Trip]) -> Void) -> ListenerRegistration? {
-           return tripCollection
-               .whereField("participantIDs", arrayContains: userId)
-               .whereField("status", isEqualTo: "completed")
-               .addSnapshotListener { snapshot, error in
-                   guard let documents = snapshot?.documents, error == nil else {
-                       completion([])
-                       return
-                   }
-
-                   let completedTrips = documents.compactMap { doc -> Trip? in
-                       return try? doc.data(as: Trip.self)
-                   }
-                   
-                   completion(completedTrips)
+   func listenToCompletedTrips(userId: String, completion: @escaping ([Trip]) -> Void) -> ListenerRegistration? {
+       return tripCollection
+           .whereField("participantIDs", arrayContains: userId)
+           .whereField("status", isEqualTo: "completed")
+           .addSnapshotListener { snapshot, error in
+               guard let documents = snapshot?.documents, error == nil else {
+                   completion([])
+                   return
                }
-       }
 
-       // Method to mark a trip as completed
-       func completeTrip(trip: Trip) async throws {
-           var updatedTrip = trip
-           updatedTrip.status = .completed
-           try tripCollection.document(trip.id).setData(from: updatedTrip)
-       }
+               let completedTrips = documents.compactMap { doc -> Trip? in
+                   return try? doc.data(as: Trip.self)
+               }
+               
+               completion(completedTrips)
+           }
+   }
+
+
+   // Method to mark a trip as completed
+   func completeTrip(trip: Trip) async throws {
+       var updatedTrip = trip
+       updatedTrip.status = .completed
+       try tripCollection.document(trip.id).setData(from: updatedTrip)
+   }
     
     func deleteTrip(tripId: String) async throws {
         try await tripCollection.document(tripId).delete()

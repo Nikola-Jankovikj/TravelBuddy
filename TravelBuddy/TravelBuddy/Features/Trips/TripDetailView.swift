@@ -4,6 +4,7 @@ struct TripDetailView: View {
     @StateObject private var viewModel: TripDetailViewModel
     @State private var showingDeleteConfirmation = false
     @Binding var shouldNavigateBack: Bool
+    @State private var participants: [DbUser] = []
     @Environment(\.presentationMode) var presentationMode
     
     init(trip: Trip, shouldNavigateBack: Binding<Bool>) {
@@ -12,41 +13,50 @@ struct TripDetailView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                TripDateSection
-                
-                Divider()
-                
-                TripLocationSection
-                
-                Divider()
-                
-                // Horizontal layout for Activities and Participants sections
-                HStack(alignment: .top, spacing: 16) {
-                    ActivitiesSection
-                    //ParticipantsSection
-                }
-                
-                if viewModel.trip.status == .planned {
+        VStack(alignment: .leading, spacing: 10) {
+            TripDateSection
+            
+            Divider()
+            
+            TripLocationSection
+            
+            Divider()
+            
+            // Horizontal layout for Activities and Participants sections
+            HStack(alignment: .top, spacing: 16) {
+                ActivitiesSection
+                ParticipantsSection
+            }
+            
+            HStack {
+                if viewModel.trip.status == .planned && viewModel.loggedInUserId == viewModel.trip.createdByUserID {
                     CompleteTripButton
                 }
                 
-                DeleteTripButton
+                if viewModel.loggedInUserId == viewModel.trip.createdByUserID {
+                    DeleteTripButton
+                }
+            }.padding(.top)
+        }
+        .padding()
+        .background(Color(.systemGroupedBackground))
+        .cornerRadius(16)
+        .onAppear {
+            viewModel.refreshTrip()
+            Task {
+                do {
+                    participants = try await viewModel.fetchParticipants()
+                } catch {
+                    print("Error fetching participants: \(error)")
+                }
             }
-            .padding()
-            .background(Color(.systemGroupedBackground))
-            .cornerRadius(16)
-            .onAppear {
-                viewModel.refreshTrip()
-            }
-            .alert(item: $viewModel.errorMessage) { errorMessage in
-                Alert(
-                    title: Text("Error"),
-                    message: Text(errorMessage.message),
-                    dismissButton: .default(Text("OK"))
-                )
-            }
+        }
+        .alert(item: $viewModel.errorMessage) { errorMessage in
+            Alert(
+                title: Text("Error"),
+                message: Text(errorMessage.message),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
     
@@ -74,7 +84,6 @@ struct TripDetailView: View {
             .padding()
             .background(Color(.systemGray6))
             .cornerRadius(12)
-            .padding(.horizontal)
         }
     }
     
@@ -117,32 +126,26 @@ struct TripDetailView: View {
     }
     
     // Participants Section
-//    private var ParticipantsSection: some View {
-//        VStack(alignment: .leading, spacing: 8) {
-//            SectionHeader(title: "Participants")
-//            ForEach(viewModel.trip.participantIDs, id: \.self) { participantID in
-//                HStack {
-//                    Circle()
-//                        .fill(Color.blue.opacity(0.2))
-//                        .frame(width: 40, height: 40)
-//                        .overlay(
-//                            Text(initials(for: participantID))
-//                                .font(.headline)
-//                                .foregroundColor(.blue)
-//                        )
-//                    Text(participantID)
-//                        .font(.subheadline)
-//                        .foregroundColor(.primary)
-//                }
-//                .padding(.vertical, 4)
-//                .frame(maxWidth: .infinity, alignment: .leading)
-//                .background(Color(.systemGray6))
-//                .cornerRadius(8)
-//                .padding(.horizontal)
-//            }
-//        }
-//        .frame(maxWidth: .infinity)
-//    }
+    private var ParticipantsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            SectionHeader(title: "Participants")
+            ForEach(participants) { participant in
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.blue)
+                    Text(participant.name)
+                        .font(.subheadline)
+                        .foregroundColor(.primary)
+                }
+                .padding(.vertical, 4)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .padding(.horizontal)
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
     
     // Complete Trip Button
     private var CompleteTripButton: some View {
@@ -150,7 +153,8 @@ struct TripDetailView: View {
             viewModel.completeTrip(trip: viewModel.trip)
         }) {
             Label("Complete Trip", systemImage: "checkmark.circle.fill")
-                .font(.headline)
+                .font(.subheadline)
+                .fontWidth(.condensed)
                 .frame(maxWidth: .infinity)
                 .padding()
                 .background(Color.green)
@@ -158,7 +162,6 @@ struct TripDetailView: View {
                 .cornerRadius(12)
                 .shadow(radius: 3)
         }
-        .padding(.horizontal)
     }
     
     // Delete Trip Button
@@ -167,7 +170,8 @@ struct TripDetailView: View {
             showingDeleteConfirmation = true
         }) {
             Label("Delete Trip", systemImage: "trash.fill")
-                .font(.headline)
+                .font(.subheadline)
+                .fontWidth(.condensed)
                 .frame(maxWidth: .infinity)
                 .padding()
                 .background(Color.red)
@@ -175,7 +179,6 @@ struct TripDetailView: View {
                 .cornerRadius(12)
                 .shadow(radius: 3)
         }
-        .padding(.horizontal)
         .alert("Are you sure you want to delete this trip?", isPresented: $showingDeleteConfirmation) {
             Button("Cancel", role: .cancel) { }
             Button("Delete", role: .destructive) {
@@ -198,13 +201,6 @@ struct TripDetailView: View {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         return formatter.string(from: date)
-    }
-    
-    // Helper function to get initials from participant ID
-    private func initials(for participantID: String) -> String {
-        let names = participantID.split(separator: " ")
-        let initials = names.compactMap { $0.first }.prefix(2)
-        return String(initials)
     }
     
     // Header for each section

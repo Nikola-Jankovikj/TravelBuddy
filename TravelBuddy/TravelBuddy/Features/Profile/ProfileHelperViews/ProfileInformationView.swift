@@ -38,13 +38,14 @@ struct ProfileInformationView: View {
             HStack {
                 Spacer()
                 
-                VStack {
+                VStack (alignment: .leading){
                     Text("\(user.name), \(user.age)")
                         .bold()
                         .font(.title)
                     
                     Text("\(user.location.city), \(user.location.country)")
                 }
+                .frame(maxWidth: .infinity)
                 
                 Spacer()
                 

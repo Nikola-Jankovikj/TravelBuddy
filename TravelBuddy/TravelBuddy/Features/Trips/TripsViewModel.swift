@@ -18,11 +18,13 @@ class TripsViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var loggedInUser: DbUser?
     @Published var requestedUsers: [DbUser] = []
+    @Published var requestedUserIds: [String] = []
     
     private let tripManager = TripManager.shared
     private var activeTripListener: ListenerRegistration?
     private var completedTripsListener: ListenerRegistration?
     private var participatedTripsListener: ListenerRegistration?
+    private var requestedUsersListener: ListenerRegistration?
 
     var isUserTripOwner: Bool {
             guard let loggedInUser = Auth.auth().currentUser, let activeTrip = activeTrip else { return false }
@@ -53,6 +55,9 @@ class TripsViewModel: ObservableObject {
         activeTripListener = tripManager.listenToActiveTrip(userId: userId) { [weak self] activeTrip in
             DispatchQueue.main.async {
                 self?.activeTrip = activeTrip
+                Task {
+                    await self?.updateRequestedUsers(for: activeTrip)
+                }
             }
         }
         
@@ -68,6 +73,31 @@ class TripsViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self?.completedTrips = completedTrips
             }
+        }
+    }
+    
+    private func updateRequestedUsers(for activeTrip: Trip?) async {
+        guard let requestedUsersIds = activeTrip?.requestedUsersIds else {
+            DispatchQueue.main.async {
+                self.requestedUsers = []
+            }
+            return
+        }
+
+        var users: [DbUser] = []
+        for userId in requestedUsersIds {
+            do {
+                let user = try await UserManager.shared.getUser(userId: userId)
+                users.append(user)
+            } catch {
+                DispatchQueue.main.async {
+                    self.errorMessage = "Error fetching user: \(error)"
+                }
+            }
+        }
+
+        DispatchQueue.main.async {
+            self.requestedUsers = users
         }
     }
 

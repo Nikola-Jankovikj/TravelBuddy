@@ -17,7 +17,7 @@ struct ProfileImagePickerView: View {
     
     var body: some View {
         ZStack {
-            Color.red
+            Color.blue
             
             if !imageData.compactMap({ $0 }).isEmpty {
                 ImageSliderView(imageData: $imageData, width: width)

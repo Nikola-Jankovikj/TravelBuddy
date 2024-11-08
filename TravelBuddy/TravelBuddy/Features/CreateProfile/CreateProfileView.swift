@@ -7,7 +7,7 @@ struct CreateProfileView: View {
     @State public var showRequestLocationView = false
     @Binding var email: String
     @Binding var password: String
-    @State private var selectedActivity: Activity = .sightseeing  // Default selection
+    @State private var selectedActivity: Activity = .sightseeing  // Default
 
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -72,6 +72,15 @@ struct CreateProfileView: View {
                         .stroke(Color.blue, lineWidth: 1)
                 )
             
+            TextField("Instagram", text: $viewModel.instagram)
+                .padding()
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.blue, lineWidth: 1)
+                )
+            
             // Location Button
             Button(action: {
                 if locationManager.userLocation == nil {
@@ -125,6 +134,7 @@ struct CreateProfileView: View {
                     .cornerRadius(10)
                     .shadow(radius: 3)
             }
+            .disabled(viewModel.instagram.isEmpty)
 
             Spacer()
         }

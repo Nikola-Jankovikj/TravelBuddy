@@ -11,8 +11,8 @@ import FirebaseAuth
 
 @MainActor
 final class TripCreationViewModel: ObservableObject {
-    @Published var city: String = ""
-    @Published var country: String = ""
+    @Published var showCitySearchView = false
+    @Published var location: Location = Location(city: "", country: "")
     @Published var dateFrom = Date()
     @Published var dateTo = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
     @Published var selectedActivities: Set<Activity> = []
@@ -26,7 +26,7 @@ final class TripCreationViewModel: ObservableObject {
     }
 
     var isValidTrip: Bool {
-        return !city.isEmpty && !country.isEmpty && dateFrom < dateTo
+        return !location.city.isEmpty && !location.country.isEmpty && dateFrom < dateTo
     }
 
     func createTrip() async {
@@ -48,7 +48,7 @@ final class TripCreationViewModel: ObservableObject {
         // Create the trip object
         let newTrip = Trip(
             id: UUID().uuidString,
-            destination: Location(city: city, country: country),
+            destination: location,
             startDate: dateFrom,
             endDate: dateTo,
             activities: Array(selectedActivities),

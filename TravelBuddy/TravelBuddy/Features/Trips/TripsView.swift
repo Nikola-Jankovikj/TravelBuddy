@@ -167,8 +167,10 @@ struct TripsView: View {
         }
         .padding(.horizontal)
         .sheet(isPresented: $viewModel.showTripCreation) {
-            TripCreationView { newTrip in
-                viewModel.createNewTrip(newTrip)
+            NavigationStack {
+                TripCreationView { newTrip in
+                    viewModel.createNewTrip(newTrip)
+                }
             }
         }
     }

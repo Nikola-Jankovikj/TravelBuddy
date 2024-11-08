@@ -43,7 +43,7 @@ final class TripManager {
             try? TripMapper.shared.mapSnapshotToTrip(dict: document.data())
         }
         return trips.filter {
-            user.rejectedTripIds.contains($0.id) || user.likedTripIds.contains($0.id) || $0.createdByUserID != user.id
+            !user.rejectedTripIds.contains($0.id) && !user.likedTripIds.contains($0.id) && $0.createdByUserID != user.id
         }
     }
 

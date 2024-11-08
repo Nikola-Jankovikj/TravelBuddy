@@ -21,7 +21,7 @@ final class TripManager {
     
     // Save new trip to Firestore
     func createNewTrip(trip: Trip) throws {
-        try tripDocument(tripId: trip.id ?? UUID().uuidString).setData(from: trip)
+        try tripDocument(tripId: trip.id).setData(from: trip)
     }
     
     // Fetch a specific trip by tripId
@@ -35,8 +35,15 @@ final class TripManager {
     
     func getAllTrips() async throws -> [Trip] {
         let snapshot = try await tripCollection.getDocuments()
-        return snapshot.documents.compactMap { document in
+        
+        let auth = try AuthenticationManager.shared.getAuthenticatedUser()
+        let user = try await UserManager.shared.getUser(userId: auth.uid)
+        
+        var trips = snapshot.documents.compactMap { document in
             try? TripMapper.shared.mapSnapshotToTrip(dict: document.data())
+        }
+        return trips.filter {
+            user.rejectedTripIds.contains($0.id) || user.likedTripIds.contains($0.id) || $0.createdByUserID != user.id
         }
     }
 

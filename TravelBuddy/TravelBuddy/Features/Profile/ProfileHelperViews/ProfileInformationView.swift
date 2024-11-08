@@ -82,5 +82,5 @@ struct ProfileInformationView: View {
 }
 
 #Preview {
-    ProfileInformationView(user: DbUser(id: "0", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", favoriteActivity: "Activity", dateCreated: Date.now, dateUpdated: Date.now), showEditProfileView: .constant(false), showSignInView: .constant(false))
+    ProfileInformationView(user: DbUser(id: "0", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", favoriteActivity: "Activity", dateCreated: Date.now, dateUpdated: Date.now, instagram: "instagram"), showEditProfileView: .constant(false), showSignInView: .constant(false))
 }

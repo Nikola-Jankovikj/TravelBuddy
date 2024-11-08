@@ -133,15 +133,23 @@ struct TripDetailView: View {
                 HStack {
                     Image(systemName: "checkmark.circle.fill")
                         .foregroundColor(.blue)
-                    Text(participant.name)
-                        .font(.subheadline)
-                        .foregroundColor(.primary)
+                    Button(action: viewModel.toggleShowAlertDialog) {
+                        Text(participant.name)
+                            .font(.subheadline)
+                            .foregroundColor(.primary)
+                    }
+//                    Text(participant.name)
+//                        .font(.subheadline)
+//                        .foregroundColor(.primary)
                 }
                 .padding(.vertical, 4)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                 .padding(.horizontal)
+                .alert(participant.instagram, isPresented: $viewModel.showAlertDialog) {
+                    Button("Ok", role: .cancel) { }
+                }
             }
         }
         .frame(maxWidth: .infinity)

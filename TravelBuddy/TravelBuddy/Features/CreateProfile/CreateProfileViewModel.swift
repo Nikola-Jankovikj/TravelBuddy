@@ -20,6 +20,7 @@ final class CreateProfileViewModel : ObservableObject {
     @Published var favoriteActivity : Activity = .sightseeing
     @Published var description = ""
     @Published var location = Location(city: "", country: "")
+    @Published var instagram = ""
     
     @Published var locationManager = LocationManager.shared
 
@@ -44,7 +45,8 @@ final class CreateProfileViewModel : ObservableObject {
             description: description,
             favoriteActivity: favoriteActivity.rawValue,
             dateCreated: Date(),
-            dateUpdated: Date()
+            dateUpdated: Date(),
+            instagram: instagram
         )
         
         try UserManager.shared.createNewUser(user: user)

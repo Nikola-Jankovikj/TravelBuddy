@@ -88,6 +88,11 @@ struct SignUpEmailView: View {
             return false
         }
         
+        guard viewModel.password.count >= 6 else {
+            errorMessage = "Password must be at least 6 characters long"
+            return false
+        }
+        
         errorMessage = ""
         return true
     }

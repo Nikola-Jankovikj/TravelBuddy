@@ -13,6 +13,7 @@ class TripDetailViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var loggedInUserId: String = ""
     @Published var errorMessage: ErrorMessage?
+    @Published var showAlertDialog: Bool = false
     
 
     private let tripManager = TripManager.shared
@@ -25,6 +26,10 @@ class TripDetailViewModel: ObservableObject {
         catch{
             print("Error fetching authenticated user: \(error.localizedDescription)")
         }
+    }
+    
+    func toggleShowAlertDialog() {
+        showAlertDialog.toggle()
     }
 
     func refreshTrip() {

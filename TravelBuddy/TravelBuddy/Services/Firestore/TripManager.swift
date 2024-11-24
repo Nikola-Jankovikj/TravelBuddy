@@ -187,6 +187,7 @@ final class TripManager {
     func listenToParticipatedTrips(userId: String, completion: @escaping ([Trip]) -> Void) -> ListenerRegistration? {
         return tripCollection
             .whereField("participantIDs", arrayContains: userId)
+            .whereField("status", isEqualTo: "Planned")
             .addSnapshotListener { snapshot, error in
                 guard let documents = snapshot?.documents, error == nil else {
                     completion([])

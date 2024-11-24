@@ -7,8 +7,15 @@ struct SwipingCardView: View {
     var tripUser: DbUser?
     var addToLikedTrips: @MainActor (_ trip: Trip) async throws -> Void
     var addToRejectedTrips: @MainActor (_ trip: Trip) async throws -> Void
+    private let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            return formatter
+    }()
+    
     
     var body: some View {
+    
         GeometryReader { geometry in
             ZStack {
                 ImageSliderView(imageData: $photos, width: geometry.size.width)
@@ -19,15 +26,28 @@ struct SwipingCardView: View {
                     HStack {
                         VStack {
                             HStack {
-                                Text("\(tripUser?.name ?? "Name"), \(tripUser?.age ?? 18)")
+                                Text("Created by:\n\(tripUser?.name ?? "Name"), \(tripUser?.age ?? 18)")
                                     .fontWeight(.heavy)
-                                    .shadow(radius: 10)
+                                    .shadow(color: Color.black, radius: 5, y: 2)
                                 Spacer()
-                            }
+                            }.padding(.top, 20)
                             HStack {
                                 Text("\(String(describing: tripUser?.location ?? Location(city: "", country: "")))")
                                     .fontWeight(.heavy)
-                                    .shadow(radius: 10)
+                                    .shadow(color: Color.black, radius: 5, y: 2)
+                                Spacer()
+                            }
+                            Spacer()
+                            HStack {
+                                Text("Trip to:\n\(String(describing: trip?.destination ?? Location(city: "", country: "")))")
+                                    .fontWeight(.heavy)
+                                    .shadow(color: Color.black, radius: 5, y: 2)
+                                Spacer()
+                            }
+                            HStack{
+                                Text("\(dateFormatter.string(for: trip?.startDate) ?? "StartDate") - \(dateFormatter.string(for: trip?.startDate) ?? "EndDate")")
+                                    .fontWeight(.heavy)
+                                    .shadow(color: Color.black, radius: 5, y: 2)
                                 Spacer()
                             }
                         }
@@ -79,6 +99,7 @@ struct SwipingCardView: View {
                         .padding()
                     }
                     .padding(.horizontal)
+                    .padding(.bottom, 20)
                 }
             }
         }

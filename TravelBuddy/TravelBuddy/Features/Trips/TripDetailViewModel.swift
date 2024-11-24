@@ -88,4 +88,19 @@ class TripDetailViewModel: ObservableObject {
             }
         }
     }
+    
+    func leaveTrip(trip: Trip) {
+        Task {
+            do {
+                self.trip.participantIDs.removeAll { participantId in
+                    participantId == loggedInUserId
+                }
+                try tripManager.updateTrip(trip: self.trip)
+            } catch {
+                DispatchQueue.main.async {
+                    self.errorMessage = ErrorMessage(message: "Failed to complete trip: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
 }

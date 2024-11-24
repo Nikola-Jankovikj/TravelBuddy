@@ -8,6 +8,8 @@ struct CreateProfileView: View {
     @Binding var email: String
     @Binding var password: String
     @State private var selectedActivity: Activity = .sightseeing  // Default
+    let columns = [GridItem(.flexible()), GridItem(.flexible())] // Two columns layout
+
 
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -16,6 +18,7 @@ struct CreateProfileView: View {
     }()
 
     var body: some View {
+        Spacer()
         VStack(spacing: 25) {
             
 
@@ -36,25 +39,27 @@ struct CreateProfileView: View {
                     .fontWeight(.semibold)
                     .foregroundColor(.gray)
 
-                ForEach(Activity.allCases) { activity in
-                    HStack {
-                        Image(systemName: selectedActivity == activity ? "circle.fill" : "circle") // Use filled circle for selected
-                            .foregroundColor(selectedActivity == activity ? .blue : .gray)
-                            .onTapGesture {
-                                selectedActivity = activity
-                                viewModel.favoriteActivity = activity // Update selected activity
-                            }
+                LazyVGrid(columns: columns, spacing: 16) {
+                            ForEach(Activity.allCases, id: \.self) { activity in
+                                HStack {
+                                    Image(systemName: selectedActivity == activity ? "circle.fill" : "circle")
+                                        .foregroundColor(selectedActivity == activity ? .blue : .gray)
+                                        .onTapGesture {
+                                            selectedActivity = activity
+                                            viewModel.favoriteActivity = activity
+                                        }
 
-                        Text(activity.rawValue)
-                            .onTapGesture {
-                                selectedActivity = activity
-                                viewModel.favoriteActivity = activity // Update selected activity on label tap
+                                    Text(activity.rawValue)
+                                        .onTapGesture {
+                                            selectedActivity = activity
+                                            viewModel.favoriteActivity = activity
+                                        }
+                                }
+                                .padding(.vertical, 8)
+                                .contentShape(Rectangle())
                             }
-                    }
-                    .padding(.vertical, 8)
-                    .contentShape(Rectangle()) // Make the entire row tappable
-                }
-                
+                        }
+                        .padding()
                 // Optional: Add a divider for visual separation
                 Divider()
             }

@@ -37,6 +37,10 @@ struct TripDetailView: View {
                     DeleteTripButton
                 }
             }.padding(.top)
+            
+            if viewModel.trip.participantIDs.contains(viewModel.loggedInUserId) && viewModel.trip.createdByUserID != viewModel.loggedInUserId {
+                LeaveTripButton
+            }
         }
         .padding()
         .background(Color(.systemGroupedBackground))
@@ -201,6 +205,23 @@ struct TripDetailView: View {
                     }
                 }
             }
+        }
+    }
+    
+    // Complete Trip Button
+    private var LeaveTripButton: some View {
+        Button(action: {
+            viewModel.leaveTrip(trip: viewModel.trip)
+        }) {
+            Label("Leave Trip", systemImage: "checkmark.circle.fill")
+                .font(.subheadline)
+                .fontWidth(.condensed)
+                .frame(maxWidth: .infinity)
+                .padding()
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(12)
+                .shadow(radius: 3)
         }
     }
     

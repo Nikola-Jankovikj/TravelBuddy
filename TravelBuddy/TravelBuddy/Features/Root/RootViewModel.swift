@@ -38,7 +38,7 @@ final class RootViewModel : ObservableObject {
     
     func retreiveUser() -> DbUser {
         guard let user else {
-            return DbUser(id: "0", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", favoriteActivity: "Activity", dateCreated: Date.now, dateUpdated: Date.now)
+            return DbUser(id: "0", name: "Name", age: 18, location: Location(city: "Skopje", country: "Macedonia"), description: "Description", favoriteActivity: "Activity", dateCreated: Date.now, dateUpdated: Date.now, instagram: "instagram")
         }
         return user
     }

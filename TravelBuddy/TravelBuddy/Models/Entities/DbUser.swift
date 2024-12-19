@@ -21,4 +21,5 @@ struct DbUser: Identifiable, Codable {
     var rejectedTripIds: [String] = []
     var dateCreated: Date
     var dateUpdated: Date
+    var instagram: String
 }

@@ -43,6 +43,8 @@ struct Trip: Identifiable, Codable, Hashable {
     static func == (lhs: Trip, rhs: Trip) -> Bool {
         return lhs.id == rhs.id
     }
+    
+
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

@@ -15,16 +15,23 @@ struct SwipingView: View {
     var body: some View {
         VStack {
             NavigationStack {
-                Button("Show filters") {
+                Button("Search trips") {
                     print("id: \(viewModel.id)")
                     showSwipingFilterView.toggle()
-                }
+                }.font(.headline)
+                    .frame(maxWidth: .infinity)
+                    .padding(15)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(12)
+                    .shadow(radius: 3)
             }
             .navigationDestination(isPresented: $showSwipingFilterView) {
                 SwipingFilterView(viewModel: viewModel, showSwipingFilterView: $showSwipingFilterView, user: $user)
             }
+            .padding(.horizontal, 20)
+            .padding(.top, 20)
             
-            Text("num Trips: \(viewModel.trips.count)")
 
             if viewModel.showingTrip != nil {
                 

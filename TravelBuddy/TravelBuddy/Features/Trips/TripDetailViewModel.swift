@@ -13,6 +13,7 @@ class TripDetailViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var loggedInUserId: String = ""
     @Published var errorMessage: ErrorMessage?
+    @Published var showAlertDialog: Bool = false
     
 
     private let tripManager = TripManager.shared
@@ -25,6 +26,10 @@ class TripDetailViewModel: ObservableObject {
         catch{
             print("Error fetching authenticated user: \(error.localizedDescription)")
         }
+    }
+    
+    func toggleShowAlertDialog() {
+        showAlertDialog.toggle()
     }
 
     func refreshTrip() {
@@ -76,6 +81,21 @@ class TripDetailViewModel: ObservableObject {
         Task {
             do {
                 try await tripManager.completeTrip(trip: trip)
+            } catch {
+                DispatchQueue.main.async {
+                    self.errorMessage = ErrorMessage(message: "Failed to complete trip: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    
+    func leaveTrip(trip: Trip) {
+        Task {
+            do {
+                self.trip.participantIDs.removeAll { participantId in
+                    participantId == loggedInUserId
+                }
+                try tripManager.updateTrip(trip: self.trip)
             } catch {
                 DispatchQueue.main.async {
                     self.errorMessage = ErrorMessage(message: "Failed to complete trip: \(error.localizedDescription)")

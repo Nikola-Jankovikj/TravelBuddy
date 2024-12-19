@@ -27,34 +27,6 @@ struct TripsView: View {
                         
                     } else {
                         CompletedTripsView()
-                        VStack(spacing: 20) {
-                            Text("No created trip")
-                                .font(.title3)
-                                .fontWeight(.semibold)
-                                .foregroundColor(.secondary)
-                                .padding(.top, 40)
-
-                            Button(action: {
-                                viewModel.showTripCreation = true
-                            }) {
-                                Text("Create New Trip")
-                                    .font(.headline)
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(12)
-                                    .shadow(radius: 3)
-                            }
-                            .padding(.horizontal)
-                        }
-                        .sheet(isPresented: $viewModel.showTripCreation) {
-                            NavigationStack {
-                                TripCreationView { newTrip in
-                                    viewModel.createNewTrip(newTrip)
-                                }
-                            }
-                        }
                     }
                 }
                 
@@ -167,8 +139,10 @@ struct TripsView: View {
         }
         .padding(.horizontal)
         .sheet(isPresented: $viewModel.showTripCreation) {
-            TripCreationView { newTrip in
-                viewModel.createNewTrip(newTrip)
+            NavigationStack {
+                TripCreationView { newTrip in
+                    viewModel.createNewTrip(newTrip)
+                }
             }
         }
     }
